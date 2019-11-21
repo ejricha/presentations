@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Ranges in C++20</title>
+
+		<meta name="description" content="A brief introduction to ranges in C++20">
+		<meta name="author" content="Hakim El Hattab">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Start of the slides -->
+
+				<section id="title">
+					<h1>Ranges in C++20</h1>
+					A brief introduction to ranges
+				</section>
+
+				<section>
+					<h2>The One Ranges Proposal</h2>
+					<p>The One Ranges Proposal (<a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0896r4.pdf">P0896r4</a>) is 226 pages long</p>
+					<small class="fragment">(I haven't read it all)</small>
+				</section>
+
+				<section id="definitions">
+					<section>
+						<h2>Definitions</h2>
+					</section>
+					<section>
+						<h3>Range</h3>
+						<p class="fragment">For any forward-iteratable container, must have two things:</p>
+						<ul>
+							<li class="fragment">An <u>iterator</u> marking the begining</li>
+							<li class="fragment">A <u>sentinel</u> marking the end</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Sentinel</h3>
+						<p class="fragment">The sentinel can be one of three things:</p>
+						<ul>
+							<li class="fragment">An <u>iterator</u> to just past the end of the range; this is normal for standard algorithms/containers</li>
+							<li class="fragment">A <u>value</u>, the first occurrence of which will <i>not</i> end up in the range</li>
+							<li class="fragment">A <u>size</u>, meaning the number of elements in the range</li>
+						</ul>
+					</section> 
+					<section>
+						<h3>View</h3>
+					</section>
+					<section>
+						<h3>Range Adapter</h3>
+						<p class="fragment">A utility that transforms a range into a view, with custom behaviors"</p>
+						<div class="fragment">
+						<p>Examples include:</p>
+						<ul>
+							<li><code>view::filter</code></li>
+							<li><code>view::transform</code></li>
+						</ul>
+						</div>
+					</section>
+					<section>
+						<h3>Range Factory</h3>
+					</section>
+					<section>
+						<h3>Projection</h3>
+						A transformation that an algorithm applies before inspecting the values of elements
+					</section>
+				</section>
+
+				<section id="compiler" data-background-iframe="https://en.cppreference.com/w/cpp/compiler_support" data-background-interactive>
+					<div style="color:gray">
+						<h2 style="color:gray">Compiler Support for Ranges</h2>
+						As of now, there is no range support baked into any compiler
+					</div>
+				</section>
+
+				<section id="libraries">
+					<section>
+						<h2>Instead, I'll be using the following implementations</h2>
+					</section>
+					<section>
+						<h3><a href="https://github.com/ericniebler/range-v3.git">range-v3</a></h3>
+						<ul>
+							<li class="fragment">Eric Niebler's original ranges library</li>
+							<li class="fragment">This is the basis for The One Ranges Proposal</li>
+							<li class="fragment">Requires C++14/17, re-implements concepts</li>
+							<li class="fragment">Has many more features than what will be in C++20</li>
+						</ul>
+					</section>
+					<section>
+						<h3><a href="https://github.com/CaseyCarter/cmcstl2.git">CMCSTL2</a></h3>
+						<ul>
+							<li class="fragment">Casey Carter's reference implementation of C++20 ranges</li>
+							<li class="fragment">Requires C++17, with <code>-fconcepts</code></li>
+							<li class="fragment">Should exactly match what is going into the C++20 standard</li>
+						</ul>
+					</section>
+					<section>
+						<h3><a href="https://github.com/tcbrindle/NanoRange.git">NanoRange</a></h3>
+						<ul>
+							<li class="fragment">Tristan Brindle's implementation of C++20 ranges</li>
+							<li class="fragment">Requires C++17, with <code>-fconcepts</code></li>
+							<li class="fragment">Another implementation based on the C++20 standard</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<h2>Concept heirarchy for ranges</h3>
+					range
+						common_range
+						output_range
+						sized_range disabled_size_range
+						view enable_view view_base
+							viewable_base
+						input_range
+							forward_range
+								bidirectional_range
+									random_access_range
+										contiguous_range
+				</section>
+
+				<section id="examples">
+					<h2>Examples</h2>
+				</section>
+
+				<section>
+					<section>
+						<h3>Simple view example</h3>
+					</section>
+					<section>
+						<h3>Runtime comparison</h3>
+						<canvas data-chart="line">
+							Month, January, February, March, April, May, June, July
+							My first dataset, 65, 59, 80, 81, 56, 55, 40
+							My second dataset, 28, 48, 40, 19, 86, 27, 90
+						</canvas>
+					</section>
+					<section>
+						<h3>Compile time comparison</h3>
+					</section>
+				</section>
+
+				<section id="references">
+					<section>
+						<h2>References</h2>
+						<ul>
+							<li>https://en.cppreference.com/w/cpp/ranges</li>
+							<li>http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0896r4.pdf</li>
+						</ul>
+					</section>
+					<section id="youtube">
+					</section>
+				</section>
+
+				<section id="questions">
+					<h1>Questions?</h2>
+				</section>
+
+				<!-- End of the slides -->
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
