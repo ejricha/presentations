@@ -64,7 +64,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 						<p class="fragment">The sentinel can be one of three things:</p>
 						<ul>
 							<li class="fragment">An <u>iterator</u> to just past the end of the range; this is normal for standard algorithms/containers</li>
-							<li class="fragment">A <u>value</u>, the first occurrence of which will <i>not</i> end up in the range</li>
+							<li class="fragment">A <u>value</u>, the first occurrence of which will <em>not</em> end up in the range</li>
 							<li class="fragment">A <u>size</u>, the number of elements in a <code>counted_range</code></li>
 						</ul>
 					</section>
@@ -222,11 +222,7 @@ for (auto e : Ranges::views::iota(17)
 					</section>
 					<section>
 						<h3>Compile time comparison</h3>
-						<canvas data-chart="bar">
-No ranges, 0.959s
-range-v3, 3.313
-NanoRange, 1.787
-CMCSTL2, 7.670
+						<img src="ranges/compile_times.png">
 					</section>
 					<section>
 						<h3>Run-time - Is Even</h3>
@@ -239,7 +235,7 @@ CMCSTL2, 7.670
 					<section>
 						<h3>Run-time - Is Even Squared</h3>
 						<img src="ranges/results_EvenThenSquared.png">
-						<small>Maybe a bug with CMCSTL2 here, I had to work around it</small>
+						<small><em>(Maybe a bug with CMCSTL2 here, I had to work around it)</em></small>
 					</section>
 					<section>
 						<h3>Run-time - Fast Filter</h3>
