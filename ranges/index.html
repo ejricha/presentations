@@ -70,7 +70,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 					</section>
 					<section>
 						<h3>View</h3>
-						<p class="fragment">A type of range that constant-time copy/move/size operations</p>
+						<p class="fragment">A type of range with constant-time copy/move/size operations</p>
+						<p class="fragment">(Think <code>std::vector</code>, not <code>std::list</code>)</p>
 					</section>
 					<section>
 						<h3>Range Adapter</h3>
@@ -82,7 +83,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 							<li><code>filter, transform</code></li>
 							<li><code>take</code>, <code>take_while</code>, <code>drop</code>, <code>drop_while</code></li>
 							<li><code>elements</code>, <code>keys</code>, <code>values</code>
-							<li>and others...</li>
+							<li><a href="https://en.cppreference.com/w/cpp/ranges">and others...</a></li>
 						</ul>
 						</div>
 					</section>
@@ -104,7 +105,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 						<ul>
 							<li class="fragment">Eric Niebler's original ranges library</li>
 							<li class="fragment">This is the basis for The One Ranges Proposal</li>
-							<li class="fragment">Requires C++14/17, re-implements concepts</li>
+							<li class="fragment">Requires only C++11 or higher, re-implements concepts</li>
 							<li class="fragment">Has many more features than what will be in C++20</li>
 						</ul>
 					</section>
