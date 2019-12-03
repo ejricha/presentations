@@ -11,7 +11,7 @@
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		
+
 		<!-- Main theme, options black, white, league, sky, beige, simple, serif, blood, night, moon, and solarized -->
 		<link rel="stylesheet" href="css/theme/white.css">
 
@@ -150,13 +150,25 @@ range | adapter;
 						<h2>Examples</h2>
 					</section>
 					<section>
+						<h3>Function syntax</h3>
+						The normal function syntax looks a bit awkward, especially when chaining together several range adapters:
+						<pre><code data-trim data-noescape class="cpp">
+for (auto e : Ranges::views::take(
+  Ranges::views::iota(17), 5))
+{
+  std::cout << " " << e;
+}
+// 17 18 19 20 21
+						</code></pre>
+					</section>
+					<section>
 						<h3>The pipe operator</h3>
 						The pipe operator (<code>|</code>) allows for easy chaining of range adapters:
 						<pre><code data-trim data-noescape class="cpp">
 for (auto e : Ranges::views::iota(17)
-	| Ranges::views::take(5))
+  | Ranges::views::take(5))
 {
-	std::cout << " " << e;
+  std::cout << " " << e;
 }
 // 17 18 19 20 21
 						</code></pre>
@@ -166,10 +178,10 @@ for (auto e : Ranges::views::iota(17)
 						The <code>take_while</code> range adapter only takes elements while the condition is met:
 						<pre><code data-trim data-noescape class="cpp">
 for (auto e : Ranges::views::iota(17)
-	<mark>| Ranges::views::take_while(LessThanTwenty)</mark>
-	| Ranges::views::take(5))
+  <mark>| Ranges::views::take_while(LessThanTwenty)</mark>
+  | Ranges::views::take(5))
 {
-	std::cout << " " << e;
+  std::cout << " " << e;
 }
 // 17 18 19
 						</code></pre>
@@ -179,10 +191,10 @@ for (auto e : Ranges::views::iota(17)
 						<code>drop_while</code> is similar, but it only starts taking elements once the condition is first met:
 						<pre><code data-trim data-noescape class="cpp">
 for (auto e : Ranges::views::iota(17)
-	<mark>| Ranges::views::drop_while(LessThanTwenty)</mark>
-	| Ranges::views::take(5))
+  <mark>| Ranges::views::drop_while(LessThanTwenty)</mark>
+  | Ranges::views::take(5))
 {
-	std::cout << " " << e;
+  std::cout << " " << e;
 }
 // 20 21 22 23 24
 						</code></pre>
@@ -192,11 +204,11 @@ for (auto e : Ranges::views::iota(17)
 						The <code>reverse</code> adapter reverses the view:
 						<pre><code data-trim data-noescape class="cpp">
 for (auto e : Ranges::views::iota(17)
-	| Ranges::views::drop_while(LessThanTwenty)
-	| Ranges::views::take(5)
-	<mark>| Ranges::views::reverse</mark>)
+  | Ranges::views::drop_while(LessThanTwenty)
+  | Ranges::views::take(5)
+  <mark>| Ranges::views::reverse</mark>)
 {
-	std::cout << " " << e;
+  std::cout << " " << e;
 }
 // 24 23 22 21 20
 						</code></pre>
@@ -206,11 +218,11 @@ for (auto e : Ranges::views::iota(17)
 						Taking the <code>reverse</code> of an unbounded range is a bad idea:
 						<pre><code data-trim data-noescape class="cpp">
 for (auto e : Ranges::views::iota(17)
-	| Ranges::views::drop_while(LessThanTwenty)
-	<mark>| Ranges::views::reverse</mark>
-	| Ranges::views::take(5))
+  | Ranges::views::drop_while(LessThanTwenty)
+  <mark>| Ranges::views::reverse</mark>
+  | Ranges::views::take(5))
 {
-	std::cout << " " << e;
+  std::cout << " " << e;
 }
 // ERROR, range is [inf - 5, inf) or so
 						</code></pre>
