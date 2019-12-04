@@ -148,6 +148,17 @@ range | adapter;
 				<section id="examples">
 					<section>
 						<h2>Examples</h2>
+						Depending on the library, I used a different namespace alias:
+						<pre><code data-trim data-noescape class="cpp">
+// range-v3
+namespace Ranges = ranges;
+
+// NanoRange
+namespace Ranges = nano;
+
+// CMCSTL2
+namespace Ranges = std::experimental::ranges;
+						</code></pre>
 					</section>
 					<section>
 						<h3>Function syntax</h3>
