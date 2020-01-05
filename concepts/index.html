@@ -13,10 +13,11 @@
 		<link rel="stylesheet" href="css/reveal.css" />
 
 		<!-- Main theme, options black, white, league, sky, beige, simple, serif, blood, night, moon, and solarized -->
-		<link rel="stylesheet" href="css/theme/black.css" />
+		<link rel="stylesheet" href="css/theme/white.css" />
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="concepts/source_code.css" />
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Ubuntu+Mono&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="concepts/source_code_white.css" />
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -27,10 +28,7 @@ link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' 
 document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
-		<!-- Don't use ALL CAPS -->
-		<style>
-.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 { text-transform: none; }
-		</style>
+
 	</head>
 	<body>
 		<div class="reveal">
@@ -71,7 +69,7 @@ void DoSomething(const BaseClass*);
 								<code>int</code>, <code>char*</code>, <code>void</code>, etc.
 							</li>
 							<li>
-								They can also be user-defined types: <br />
+								They can also be user-defined types:<br />
 								<code>BaseClass*</code>, <code>DerivedClass&amp;</code>, etc.
 							</li>
 						</ul>
@@ -83,7 +81,7 @@ void DoSomething(const BaseClass*);
 								No type-checking of function arguments (similar to <code>auto</code>)
 							</li>
 							<li>
-								An attempt to instantiate a template on an illegal type <br />
+								An attempt to instantiate a template on an illegal type<br />
 								can produce breathtakingly long compile errors:
 							</li>
 							<pre><code data-trim="" data-noescape="" class="cpp">
@@ -104,7 +102,7 @@ void DoSomething(const BaseClass*);
 				<section id="libraries">
 					<h2>Compiler and libraries used</h2>
 					<p>
-						I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code>or later
+						I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code> or later
 					</p>
 					<p>
 						The important thing is that is supports the Concepts TS, via <code>-fconcepts</code>
@@ -124,8 +122,7 @@ void DoSomething(const BaseClass*);
 					</section>
 					<section>
 						<h2>Core language concepts</h2>
-						<code>
-							<a href="https://en.cppreference.com/w/cpp/concepts/same_as">same_as</a>&lt;T, U&gt;</code>
+						<code><a href="https://en.cppreference.com/w/cpp/concepts/same_as">same_as</a>&lt;T, U&gt;</code>
 						<pre><code data-trim="" data-noescape="" class="cpp">
 namespace detail {
 	template&lt;class T, class U&gt;
@@ -138,10 +135,10 @@ concept same_as =
 	detail::SameHelper&lt;T, U&gt; &amp;&amp;
 	detail::SameHelper&lt;U, T&gt;
 						</code></pre>
-						<em>true iff types <code>T</code>and <code>U</code>are the same</em>
+						<em>true iff types <code>T</code> and <code>U</code> are the same</em>
 					</section>
 					<section>
-						<h3>Here are some more:</h3>
+						<h3>More language concepts</h3>
 						<small>
 							<table>
 								<tr>
@@ -154,45 +151,45 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code>
-											<a href="https://en.cppreference.com/w/cpp/concepts/derived_from">derived_from</a>&lt;Derived, Base&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/convertible_to">convertible_to</a>&lt;From, To&gt;</code>
 									</td>
 									<td>
-										true iff <code>Derived</code>is derived from <code>Base</code>, <br />
-										and <code>Derived*</code>is convertible to <code>Base*</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code>convertible_to&lt;From, To&gt;</code>
-									</td>
-									<td>
-										true iff <code>From</code>is convertible to <code>To</code>, <br />
+										true iff <code>From</code> is convertible to <code>To</code>,<br />
 										both implicitly and via <code>static_cast&lt;To&gt;</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>common_reference_with&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/derived_from">derived_from</a>&lt;Derived, Base&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code>and <code>U</code>share a common reference type <br />
+										true iff <code>Derived</code> is derived from <code>Base</code>,<br />
+										and <code>Derived*</code> is convertible to <code>Base*</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/common_with">common_with</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code> share a common type<br />
 										to which both can be converted
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>common_with&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/common_reference_with">common_reference_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-
+										true iff <code>T</code> and <code>U</code> share a common <b>reference</b> type<br />
+										to which both can be converted
 									</td>
 								</tr>
 							</table>
 						</small>
 					</section>
 					<section>
-						<h3>Numerical concepts:</h3>
+						<h3>Numerical concepts</h3>
 						<small>
 							<table>
 								<tr>
@@ -205,41 +202,45 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code>integral&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/integral">integral</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code>signed_integral&lt;T, U&gt;</code>
-									</td>
-									<td>
-
+										true iff <code>T</code> is an integral type,<br />
+										e.g. <code>int</code> or <code>size_t</code>, but not <code>float</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>unsigned_integral&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/signed_integral">signed_integral</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-
+										true iff <code>T</code> is a signed <code>integral</code>,<br />
+										e.g. <code>int</code>, but not <code>uint32_t</code> or <code>size_t</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>floating_point&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/unsigned_integral">unsigned_integral</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-
+										true iff <code>T</code> is an <b>unsigned</b> <code>integral</code>,<br />
+										e.g. <code>uint16_t</code>, but not <code>int64_t</code> or <code>int</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/floating_point">floating_point</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> is a floating point type,<br />
+										e.g. <code>double</code> or <code>float</code>, but not <code>int</code>
 									</td>
 								</tr>
 							</table>
 						</small>
 					</section>
 					<section>
-						<h3>Assignment and swap concepts:</h3>
+						<h3>Assignment and swap concepts</h3>
 						<small>
 							<table>
 								<tr>
@@ -252,27 +253,33 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code>assignable_from&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/assignable_from">assignable_from</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>swappable&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable">swappable</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>swappable_with&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable_with">swappable_with</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 							</table>
 						</small>
 					</section>
 					<section>
-						<h3>Constructible/destructible concepts:</h3>
+						<h3>Constructible/destructible concepts</h3>
 						<small>
 							<table>
 								<tr>
@@ -285,43 +292,204 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code>destructible&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/destructible">destructible</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>constructible_from&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>default_construcible&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/default_constructible">default_constructible</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>move_constructible&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/move_constructible">move_constructible</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 								<tr>
 									<td>
-										<code>copy_constructible&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/copy_constructible">copy_constructible</a>&lt;T, U&gt;</code>
 									</td>
-									<td></td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
 								</tr>
 							</table>
 						</small>
 					</section>
 					<section>
-						<h3>Comparison concepts</h3>equality_comparable equality_comparable_with totally_ordered totally_ordered_with</section>
+						<h3>Comparison concepts</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable_with">equality_comparable_with</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered">totally_ordered</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered_with">totally_ordered_with</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/XXX">XXX</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+							</table>
+						</small>
+					</section>
 					<section>
-						<h3>Object concepts</h3>movable copyable semiregular regular</section>
+						<h3>Object concepts</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/movable">movable</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/copyable">copyable</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/semiregular">semiregular</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular">regular</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+							</table>
+						</small>
+					</section>
 					<section>
-						<h3>Callable concepts</h3>invocable regular_invocable predicate relation strict_weak_order</section>
+						<h3>Callable concepts</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular_invocable">regular_invocable</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/relation">relation</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/strict_weak_order">strict_weak_order</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+							</table>
+						</small>
+					</section>
 				</section>
 
 				<section id="references">
@@ -363,14 +531,18 @@ concept same_as =
 					</section>
 					<section id="youtube">
 						<h3>YouTube Videos</h3>
-						<ul>
-							<li>
-								<a href="https://youtu.be/ZeU6OPaGxwM?autoplay=0">CppCon 2018: Andrew Sutton “Concepts in 60: Everything you need to know and nothing you don't"</a>
-							</li>
-							<li>
-								<a href="https://youtu.be/CXn02MPkn8Y?autoplay=0">CppCon 2018: Arthur O'Dwyer “Concepts As She Is Spoke"</a>
-							</li>
-						</ul>
+						<small>
+							<ul>
+								<li>
+									<a href="https://youtu.be/ZeU6OPaGxwM?autoplay=0">CppCon 2018: Andrew Sutton<br />
+										“Concepts in 60: Everything you need to know and nothing you don't"</a>
+								</li>
+								<li>
+									<a href="https://youtu.be/CXn02MPkn8Y?autoplay=0">CppCon 2018: Arthur O'Dwyer<br />
+										"Concepts As She Is Spoke"</a>
+								</li>
+							</ul>
+						</small>
 					</section>
 				</section>
 
