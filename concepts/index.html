@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>Concepts in C++20</title>
+
+		<meta name="description" content="A brief introduction to Concepts in C++20" />
+		<meta name="author" content="Eric Richardson" />
+
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/reveal.css" />
+
+		<!-- Main theme, options black, white, league, sky, beige, simple, serif, blood, night, moon, and solarized -->
+		<link rel="stylesheet" href="css/theme/black.css" />
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="concepts/source_code.css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- Don't use ALL CAPS -->
+		<style>
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 { text-transform: none; }
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Start of the slides -->
+
+				<section id="title">
+					<h1>Concepts in C++20</h1>
+					<h3>A brief introduction to Concepts</h3>
+					<br />
+					<p>
+						<b>CppMaryland</b>
+					</p>
+					<p>
+						<code>2020-01-08</code>
+					</p>
+					<p>
+						<em>Eric Richardson</em>
+					</p>
+				</section>
+
+				<section id="purpose">
+					<section>
+						<h2>Normal C++ functions</h2>
+						<pre><code data-trim="" data-noescape="" class="cpp">
+// Function takes a single integer argument
+void DoSomething(int);
+
+// Overload takes a pointer to a base class object
+void DoSomething(const BaseClass*);
+						</code></pre>
+						<ul>
+							<li>
+								Function arguments are limited to distinct types
+							</li>
+							<li>
+								These can be built-in types:<br />
+								<code>int</code>, <code>char*</code>, <code>void</code>, etc.
+							</li>
+							<li>
+								They can also be user-defined types: <br />
+								<code>BaseClass*</code>, <code>DerivedClass&amp;</code>, etc.
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Templated functions</h2>
+						<ul>
+							<li>
+								No type-checking of function arguments (similar to <code>auto</code>)
+							</li>
+							<li>
+								An attempt to instantiate a template on an illegal type <br />
+								can produce breathtakingly long compile errors:
+							</li>
+							<pre><code data-trim="" data-noescape="" class="cpp">
+							</code></pre>
+						</ul>
+					</section>
+				</section>
+
+				<section id="definitions">
+					<section>
+						<h1>Definitions</h1>
+					</section>
+					<section>
+						<h3><a href="https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter">Non-type template parameter</a></h3>
+					</section>
+				</section>
+
+				<section id="libraries">
+					<h2>Compiler and libraries used</h2>
+					<p>
+						I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code>or later
+					</p>
+					<p>
+						The important thing is that is supports the Concepts TS, via <code>-fconcepts</code>
+					</p>
+					<p>
+						So no, this isn't truly C++20, but apparently the true Concepts are available in <code>g++-10</code>
+					</p>
+				</section>
+
+				<section id="concepts">
+					<section>
+						<h1>Available Concepts</h1>
+					</section>
+					<section>
+						<h2>Range Concept Hierarchy</h2>
+						<img src="ranges/concepts.svg" />
+					</section>
+					<section>
+						<h2>Core language concepts</h2>
+						<code>
+							<a href="https://en.cppreference.com/w/cpp/concepts/same_as">same_as</a>&lt;T, U&gt;</code>
+						<pre><code data-trim="" data-noescape="" class="cpp">
+namespace detail {
+	template&lt;class T, class U&gt;
+	concept SameHelper =
+		std::is_same_v&lt;T, U&gt;
+}
+
+template&lt;class T, class U&gt;
+concept same_as =
+	detail::SameHelper&lt;T, U&gt; &amp;&amp;
+	detail::SameHelper&lt;U, T&gt;
+						</code></pre>
+						<em>true iff types <code>T</code>and <code>U</code>are the same</em>
+					</section>
+					<section>
+						<h3>Here are some more:</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										<b>Concept Name</b>
+									</th>
+									<th>
+										<b>Description</b>
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code>
+											<a href="https://en.cppreference.com/w/cpp/concepts/derived_from">derived_from</a>&lt;Derived, Base&gt;</code>
+									</td>
+									<td>
+										true iff <code>Derived</code>is derived from <code>Base</code>, <br />
+										and <code>Derived*</code>is convertible to <code>Base*</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>convertible_to&lt;From, To&gt;</code>
+									</td>
+									<td>
+										true iff <code>From</code>is convertible to <code>To</code>, <br />
+										both implicitly and via <code>static_cast&lt;To&gt;</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>common_reference_with&lt;T, U&gt;</code>
+									</td>
+									<td>
+										true iff <code>T</code>and <code>U</code>share a common reference type <br />
+										to which both can be converted
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>common_with&lt;T, U&gt;</code>
+									</td>
+									<td>
+
+									</td>
+								</tr>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Numerical concepts:</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code>integral&lt;T, U&gt;</code>
+									</td>
+									<td>
+
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>signed_integral&lt;T, U&gt;</code>
+									</td>
+									<td>
+
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>unsigned_integral&lt;T, U&gt;</code>
+									</td>
+									<td>
+
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code>floating_point&lt;T, U&gt;</code>
+									</td>
+									<td>
+
+									</td>
+								</tr>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Assignment and swap concepts:</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code>assignable_from&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>swappable&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>swappable_with&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Constructible/destructible concepts:</h3>
+						<small>
+							<table>
+								<tr>
+									<th>
+										Concept Name
+									</th>
+									<th>
+										Description
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<code>destructible&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>constructible_from&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>default_construcible&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>move_constructible&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>
+										<code>copy_constructible&lt;T, U&gt;</code>
+									</td>
+									<td></td>
+								</tr>
+							</table>
+						</small>
+					</section>
+					<section>
+						<h3>Comparison concepts</h3>equality_comparable equality_comparable_with totally_ordered totally_ordered_with</section>
+					<section>
+						<h3>Object concepts</h3>movable copyable semiregular regular</section>
+					<section>
+						<h3>Callable concepts</h3>invocable regular_invocable predicate relation strict_weak_order</section>
+				</section>
+
+				<section id="references">
+					<section>
+						<h2>Code and Presentation</h2>
+						<p>
+							The source code is available at my GitHub page:<br />
+							<a href="https://github.com/ejricha/examples/tree/master/concepts">https://github.com/ejricha/examples/tree/master/concepts</a>
+						</p>
+						<p>
+							The presentation is available as well:<br />
+							<a href="https://github.com/ejricha/presentations">https://github.com/ejricha/presentations</a>
+						</p>
+							Also posted on the CppMaryland GitHub page:<br />
+							<a href="https://github.com/cppmaryland/presentations">https://github.com/cppmaryland/presentations</a>
+						</p>
+					</section>
+					<section>
+						<h2>References</h2>
+						<small>
+							<ul>
+								<li>
+									<a href="https://en.cppreference.com/w/cpp/header/concepts">https://en.cppreference.com/w/cpp/header/concepts</a>
+								</li>
+								<li>
+									<a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0896r4.pdf">http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0896r4.pdf</a>
+								</li>
+								<li>
+									<a href="http://ericniebler.com/2018/12/05/standard-ranges/">http://ericniebler.com/2018/12/05/standard-ranges/</a>
+								</li>
+								<li>
+									<a href="https://www.fluentcpp.com/2018/12/07/algorithms-on-ranges/">https://www.fluentcpp.com/2018/12/07/algorithms-on-ranges/</a>
+								</li>
+								<li>
+									<a href="https://meetingcpp.com/mcpp/slides/2018/C++%20Concepts%20and%20Ranges%20-%20How%20to%20use%20them.pdf">https://meetingcpp.com/mcpp/slides/2018/C++%20Concepts%20and%20Ranges%20-%20How%20to%20use%20them.pdf</a>
+								</li>
+							</ul>
+						</small>
+					</section>
+					<section id="youtube">
+						<h3>YouTube Videos</h3>
+						<ul>
+							<li>
+								<a href="https://youtu.be/ZeU6OPaGxwM?autoplay=0">CppCon 2018: Andrew Sutton “Concepts in 60: Everything you need to know and nothing you don't"</a>
+							</li>
+							<li>
+								<a href="https://youtu.be/CXn02MPkn8Y?autoplay=0">CppCon 2018: Arthur O'Dwyer “Concepts As She Is Spoke"</a>
+							</li>
+						</ul>
+					</section>
+				</section>
+
+				<section id="questions">
+					<h1>Questions?</h1>
+				</section>
+
+				<!-- End of the slides -->
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/chart/Chart.min.js' },
+					{ src: 'plugin/chart/csv2chart.js' },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+Reveal.configure({ slideNumber: 'c/t' });
+		</script>
+	</body>
+</html>
