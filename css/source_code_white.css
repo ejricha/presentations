@@ -1,11 +1,17 @@
 /*
-Monokai style - ported by Luigi Maselli - http://grigio.org
+Black text on a white background
 */
 
+@import "source_code.css";
+
+.reveal .cpp {
+  color: black;
+}
+.reveal code {
+  color: #777;
+}
+
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
   background: white;
   color: black;
 }
@@ -24,18 +30,18 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 }
 
 .hljs-class .hljs-title {
-  color: yellow;
+  color: orange;
 }
 
 .hljs-attribute,
 .hljs-symbol,
 .hljs-regexp,
 .hljs-link {
-  color: #0f0;
+  color: #0c0;
 }
 
 .hljs-string {
-  color: #f0f;
+  color: #c0c;
 }
 
 .hljs-bullet,

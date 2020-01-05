@@ -1,19 +1,30 @@
 /*
-White text on a black background
+Monokai style - ported by Luigi Maselli - http://grigio.org
 */
 
-@import "source_code.css";
-
-.reveal .cpp {
-  color: white;
+/*
+Don't use ALL CAPS
+*/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  text-transform: none;
 }
+
+/*
+Make <code> prettier
+*/
 .reveal code {
-  color: #aaa;
+  font-family: 'Ubuntu Mono', 'Source Code Pro', monospace;
+  font-size: 80%;
 }
 
 .hljs {
-  background: black;
-  color: white;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
 }
 
 .hljs-tag,
