@@ -51,10 +51,10 @@
 				<section id="purpose">
 					<section>
 						<h2>Concepts</h2>
-						<p>
+						<p class="fragment">
 						Concepts are a way to constrain templates, producing a compile error if instantiated with an invalid type
 						</p>
-						<p>
+						<p class="fragment">
 						When used with templated functions, concepts are a middle ground between <u>normal</u> functions with concrete parameter types and <u>unconstrained</u> function templates
 						</p>
 					</section>
@@ -71,14 +71,14 @@ void TestConcrete(const BaseClass& base) { /* ... */ }
 void TestConcrete(const BaseClass* base) { /* ... */ }
 						</code></pre>
 						<ul>
-							<li>
+							<li class="fragment">
 								Function arguments are limited to distinct types
 							</li>
-							<li>
+							<li class="fragment">
 								These can be built-in types:<br />
 								<code>int</code>, <code>char*</code>, <code>void</code>, etc.
 							</li>
-							<li>
+							<li class="fragment">
 								They can also be user-defined types:<br />
 								<code>BaseClass*</code>, <code>DerivedClass&amp;</code>, etc.
 							</li>
@@ -100,10 +100,10 @@ template &lt;&gt;
 void TestTemplate&lt;BaseClass*&gt;(BaseClass* base) { /* ... */ }
 						</code></pre>
 						<ul>
-							<li>
+							<li class="fragment">
 								No type-checking of function arguments (similar to <code>auto</code>)
 							</li>
-							<li>
+							<li class="fragment">
 								An attempt to instantiate a template on an illegal type can produce super long compile errors
 							</li>
 						</ul>
@@ -126,7 +126,7 @@ template &lt;typename T&gt;
 void TestConcepts(T t) { /* ... */ }
 						</code></pre>
 						<ul>
-							<li>
+							<li class="fragment">
 								Concepts make it easier to specify constraints on parameter types
 							</li>
 						</ul>
@@ -144,14 +144,14 @@ void TestConcepts(T t) { /* ... */ }
 
 				<section id="libraries">
 					<h2>Compiler and libraries used</h2>
-					<p>
-					I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code> or later
+					<p class="fragment">
+					Couldn't use <code>clang</code>, because it doesn't yet support the <a href="https://en.cppreference.com/w/cpp/experimental/constraints">Concepts TS</a> (though there <a href="https://github.com/saarraz/clang-concepts-monorepo">is a fork that does</a>)
 					</p>
-					<p>
-					The important thing is that is supports the Concepts TS, via <code>-fconcepts</code>
+					<p class="fragment">
+					I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code> or later (it just needs to support <code>-fconcepts</code>)
 					</p>
-					<p>
-					So no, this isn't truly C++20, but apparently the true Concepts are available in <code>g++-10</code>
+					<p class="fragment">
+					No, this isn't truly C++20, but apparently true C++20 Concepts are available in <code>g++-10</code>
 					</p>
 				</section>
 
