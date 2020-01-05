@@ -21,14 +21,12 @@
 
 		<!-- Printing and PDF exports -->
 		<script>
-var link = document.createElement( 'link' );
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-document.getElementsByTagName( 'head' )[0].appendChild( link );
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-
-
 	</head>
 	<body>
 		<div class="reveal">
@@ -40,13 +38,13 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 					<h3>A Brief Introduction to Concepts</h3>
 					<br />
 					<p>
-						<b>CppMaryland</b>
+					<b>CppMaryland</b>
 					</p>
 					<p>
-						<code>2020-01-08</code>
+					<code>2020-01-08</code>
 					</p>
 					<p>
-						<em>Eric Richardson</em>
+					<em>Eric Richardson</em>
 					</p>
 				</section>
 
@@ -54,10 +52,10 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 					<section>
 						<h2>Concepts</h2>
 						<p>
-							Concepts are a way to constrain templates, producing a compile error if instantiated with an invalid type
+						Concepts are a way to constrain templates, producing a compile error if instantiated with an invalid type
 						</p>
 						<p>
-							When used with templated functions, concepts are a middle ground between <u>normal</u> functions with concrete parameter types and <u>unconstrained</u> function templates
+						When used with templated functions, concepts are a middle ground between <u>normal</u> functions with concrete parameter types and <u>unconstrained</u> function templates
 						</p>
 					</section>
 					<section>
@@ -147,13 +145,13 @@ void TestConcepts(T t) { /* ... */ }
 				<section id="libraries">
 					<h2>Compiler and libraries used</h2>
 					<p>
-						I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code> or later
+					I used <code>g++ 9.2.0</code>, but you can probably use <code>g++-6</code> or later
 					</p>
 					<p>
-						The important thing is that is supports the Concepts TS, via <code>-fconcepts</code>
+					The important thing is that is supports the Concepts TS, via <code>-fconcepts</code>
 					</p>
 					<p>
-						So no, this isn't truly C++20, but apparently the true Concepts are available in <code>g++-10</code>
+					So no, this isn't truly C++20, but apparently the true Concepts are available in <code>g++-10</code>
 					</p>
 				</section>
 
@@ -541,15 +539,15 @@ concept same_as =
 					<section>
 						<h2>Code and Presentation</h2>
 						<p>
-							The source code is available at my GitHub page:<br />
-							<a href="https://github.com/ejricha/examples/tree/master/concepts">https://github.com/ejricha/examples/tree/master/concepts</a>
+						The source code is available at my GitHub page:<br />
+						<a href="https://github.com/ejricha/examples/tree/master/concepts">https://github.com/ejricha/examples/tree/master/concepts</a>
 						</p>
 						<p>
-							The presentation is available as well:<br />
-							<a href="https://github.com/ejricha/presentations">https://github.com/ejricha/presentations</a>
+						The presentation is available as well:<br />
+						<a href="https://github.com/ejricha/presentations">https://github.com/ejricha/presentations</a>
 						</p>
-							Also posted on the CppMaryland GitHub page:<br />
-							<a href="https://github.com/cppmaryland/presentations">https://github.com/cppmaryland/presentations</a>
+						Also posted on the CppMaryland GitHub page:<br />
+						<a href="https://github.com/cppmaryland/presentations">https://github.com/cppmaryland/presentations</a>
 						</p>
 					</section>
 					<section>
