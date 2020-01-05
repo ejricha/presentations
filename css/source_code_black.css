@@ -66,16 +66,4 @@ White text on a black background
 .hljs-deletion,
 .hljs-meta {
   color: #33c;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-doctag,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-selector-id {
-  font-weight: bold;
 }

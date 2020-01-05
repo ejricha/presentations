@@ -16,6 +16,9 @@ Don't use ALL CAPS
 /*
 Make <code> prettier
 */
+.reveal .cpp {
+  font-size: 100%;
+}
 .reveal code {
   font-family: 'Ubuntu Mono', 'Source Code Pro', monospace;
   font-size: 80%;
@@ -27,56 +30,10 @@ Make <code> prettier
   padding: 0.5em;
 }
 
-.hljs-tag,
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-strong,
-.hljs-name {
-  color: #c03;
-}
-
-.hljs-code {
-  color: #66d9ef;
-}
-
-.hljs-class .hljs-title {
-  color: yellow;
-}
-
-.hljs-attribute,
-.hljs-symbol,
-.hljs-regexp,
-.hljs-link {
-  color: #0f0;
-}
-
-.hljs-string {
-  color: #f0f;
-}
-
-.hljs-bullet,
-.hljs-subst,
-.hljs-title,
-.hljs-section,
-.hljs-emphasis,
-.hljs-type,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-addition,
-.hljs-variable,
-.hljs-template-tag,
-.hljs-template-variable {
-  color: #0c0;
-}
-
 .hljs-comment,
 .hljs-quote,
 .hljs-deletion,
 .hljs-meta {
-  color: #33c;
   font-style: italic;
 }
 

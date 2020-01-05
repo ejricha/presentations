@@ -37,7 +37,7 @@ Black text on a white background
 .hljs-symbol,
 .hljs-regexp,
 .hljs-link {
-  color: #0c0;
+  color: #0a0;
 }
 
 .hljs-string {
@@ -58,7 +58,7 @@ Black text on a white background
 .hljs-variable,
 .hljs-template-tag,
 .hljs-template-variable {
-  color: #0c0;
+  color: #0a0;
 }
 
 .hljs-comment,
@@ -66,16 +66,4 @@ Black text on a white background
 .hljs-deletion,
 .hljs-meta {
   color: #33c;
-  font-style: italic;
-}
-
-.hljs-keyword,
-.hljs-selector-tag,
-.hljs-literal,
-.hljs-doctag,
-.hljs-title,
-.hljs-section,
-.hljs-type,
-.hljs-selector-id {
-  font-weight: bold;
 }
