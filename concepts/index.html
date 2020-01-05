@@ -178,7 +178,7 @@ concept same_as =
 	detail::SameHelper&lt;T, U&gt; &amp;&amp;
 	detail::SameHelper&lt;U, T&gt;
 						</code></pre>
-						<em>true iff types <code>T</code> and <code>U</code> are the same</em>
+						<em><code>true</code> iff types <code>T</code> and <code>U</code> are the same</em>
 					</section>
 					<section>
 						<h3>More language concepts</h3>
@@ -197,7 +197,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/convertible_to">convertible_to</a>&lt;From, To&gt;</code>
 									</td>
 									<td>
-										true iff <code>From</code> is convertible to <code>To</code>,<br />
+										<code>true</code> iff <code>From</code> is convertible to <code>To</code>,<br />
 										both implicitly and via <code>static_cast&lt;To&gt;</code>
 									</td>
 								</tr>
@@ -206,7 +206,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/derived_from">derived_from</a>&lt;Derived, Base&gt;</code>
 									</td>
 									<td>
-										true iff <code>Derived</code> is derived from <code>Base</code>,<br />
+										<code>true</code> iff <code>Derived</code> is derived from <code>Base</code>,<br />
 										and <code>Derived*</code> is convertible to <code>Base*</code>
 									</td>
 								</tr>
@@ -215,7 +215,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/common_with">common_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code> share a common type<br />
+										<code>true</code> iff <code>T</code> and <code>U</code> share a common type<br />
 										to which both can be converted
 									</td>
 								</tr>
@@ -224,7 +224,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/common_reference_with">common_reference_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code> share a common <b>reference</b> type<br />
+										<code>true</code> iff <code>T</code> and <code>U</code> share a common <b>reference</b> type<br />
 										to which both can be converted
 									</td>
 								</tr>
@@ -245,37 +245,37 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/integral">integral</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/integral">integral</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> is an integral type,<br />
+										<code>true</code> iff <code>T</code> is an integral type,<br />
 										e.g. <code>int</code> or <code>size_t</code>, but not <code>float</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/signed_integral">signed_integral</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/signed_integral">signed_integral</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> is a signed <code>integral</code>,<br />
+										<code>true</code> iff <code>T</code> is a signed <code>integral</code>,<br />
 										e.g. <code>int</code>, but not <code>uint32_t</code> or <code>size_t</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/unsigned_integral">unsigned_integral</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/unsigned_integral">unsigned_integral</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> is an <b>unsigned</b> <code>integral</code>,<br />
+										<code>true</code> iff <code>T</code> is an <b>unsigned</b> <code>integral</code>,<br />
 										e.g. <code>uint16_t</code>, but not <code>int64_t</code> or <code>int</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/floating_point">floating_point</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/floating_point">floating_point</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> is a floating point type,<br />
+										<code>true</code> iff <code>T</code> is a floating point type,<br />
 										e.g. <code>double</code> or <code>float</code>, but not <code>int</code>
 									</td>
 								</tr>
@@ -299,7 +299,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/assignable_from">assignable_from</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -307,7 +307,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable">swappable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -315,7 +315,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable_with">swappable_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 							</table>
@@ -338,7 +338,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/destructible">destructible</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -346,7 +346,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -354,7 +354,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/default_constructible">default_constructible</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -362,7 +362,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/move_constructible">move_constructible</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -370,7 +370,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/copy_constructible">copy_constructible</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 							</table>
@@ -393,7 +393,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -401,7 +401,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable_with">equality_comparable_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -409,7 +409,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered">totally_ordered</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -417,7 +417,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered_with">totally_ordered_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -425,7 +425,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/XXX">XXX</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 							</table>
@@ -448,7 +448,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/movable">movable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -456,7 +456,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/copyable">copyable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -464,7 +464,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/semiregular">semiregular</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -472,7 +472,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular">regular</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 							</table>
@@ -495,7 +495,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -503,7 +503,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular_invocable">regular_invocable</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -511,7 +511,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -519,7 +519,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/relation">relation</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 								<tr>
@@ -527,7 +527,7 @@ concept same_as =
 										<code><a href="https://en.cppreference.com/w/cpp/concepts/strict_weak_order">strict_weak_order</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										true iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code>
 									</td>
 								</tr>
 							</table>
