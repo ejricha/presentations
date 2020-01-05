@@ -61,13 +61,13 @@
 					<section>
 						<h2>Normal C++ functions</h2>
 						<pre><code data-trim="" data-noescape="" class="cpp">
-// Pass an integer (by value)
+// Pass an integer
 void TestConcrete(int i) { /* ... */ }
 
 // Pass a const reference to a base class
 void TestConcrete(const BaseClass& base) { /* ... */ }
 
-// Pass a const pointer to a base class
+// Pass a pointer to a const base class
 void TestConcrete(const BaseClass* base) { /* ... */ }
 						</code></pre>
 						<ul>
@@ -87,15 +87,15 @@ void TestConcrete(const BaseClass* base) { /* ... */ }
 					<section>
 						<h2>Templated functions</h2>
 						<pre><code data-trim="" data-noescape="" class="cpp">
-// Pass an unconstrained T
+// Pass an unconstrained template parameter T
 template &lt;typename T&gt;
 void TestTemplate(T t) { /* ... */ }
 
-// Specialization for int
+// Template specialization for int
 template &lt;&gt;
 void TestTemplate&lt;int&gt;(int i) { /* ... */ }
 
-// Specialization for pointer to a base class
+// Template specialization for pointer to a base class
 template &lt;&gt;
 void TestTemplate&lt;BaseClass*&gt;(BaseClass* base) { /* ... */ }
 						</code></pre>
