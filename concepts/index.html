@@ -63,11 +63,14 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
 					<section>
 						<h2>Normal C++ functions</h2>
 						<pre><code data-trim="" data-noescape="" class="cpp">
-// Function takes a single integer argument
-void DoSomething(int);
+// Pass an integer (by value)
+void TestConcrete(int i) { /* ... */ }
 
-// Overload takes a pointer to a base class object
-void DoSomething(const BaseClass*);
+// Pass a const reference to a base class
+void TestConcrete(const BaseClass& base) { /* ... */ }
+
+// Pass a const pointer to a base class
+void TestConcrete(const BaseClass* base) { /* ... */ }
 						</code></pre>
 						<ul>
 							<li>
@@ -85,16 +88,49 @@ void DoSomething(const BaseClass*);
 					</section>
 					<section>
 						<h2>Templated functions</h2>
+						<pre><code data-trim="" data-noescape="" class="cpp">
+// Pass an unconstrained T
+template &lt;typename T&gt;
+void TestTemplate(T t) { /* ... */ }
+
+// Specialization for int
+template &lt;&gt;
+void TestTemplate&lt;int&gt;(int i) { /* ... */ }
+
+// Specialization for pointer to a base class
+template &lt;&gt;
+void TestTemplate&lt;BaseClass*&gt;(BaseClass* base) { /* ... */ }
+						</code></pre>
 						<ul>
 							<li>
 								No type-checking of function arguments (similar to <code>auto</code>)
 							</li>
 							<li>
-								An attempt to instantiate a template on an illegal type<br />
-								can produce breathtakingly long compile errors:
+								An attempt to instantiate a template on an illegal type can produce super long compile errors
 							</li>
-							<pre><code data-trim="" data-noescape="" class="cpp">
-							</code></pre>
+						</ul>
+					</section>
+					<section>
+						<h2>Constrained with concepts</h2>
+						<pre><code data-trim="" data-noescape="" class="cpp">
+// Same unconstrained function template
+template &lt;typename T&gt;
+void TestConcepts(T t) { /* ... */ }
+
+// Require that T is an integral type
+template &lt;typename T&gt;
+	requires Concepts::integral&lt;T&gt;
+void TestConcepts(T t) { /* ... */ }
+
+// Require that T is a pointer to something
+template &lt;typename T&gt;
+	requires IsPointer&lt;T&gt;
+void TestConcepts(T t) { /* ... */ }
+						</code></pre>
+						<ul>
+							<li>
+								Concepts make it easier to specify constraints on parameter types
+							</li>
 						</ul>
 					</section>
 				</section>
