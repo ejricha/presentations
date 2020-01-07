@@ -243,7 +243,46 @@ requires {
 						<h1>Definitions</h1>
 					</section>
 					<section>
-						<h3><a href="https://en.cppreference.com/w/cpp/language/template_parameters#Non-type_template_parameter">Non-type template parameter</a></h3>
+						<h3>Requires <a href="https://en.cppreference.com/w/cpp/language/constraints#Requires_clauses"><b>clauses</b></a> and <a href="https://en.cppreference.com/w/cpp/language/constraints#Requires_expression"><b>expression</b></a></h3>
+						<div class="fragment">
+							Requires <b>clauses</b> are used to specify constraints
+							<pre><code data-trim data-noescape class="cpp">
+template&lt;typename T&gt; <mark>requires</mark> Addable&lt;T&gt;
+T add(T a, T b) { return a + b; }
+							</code></pre>
+						</div>
+						<br />
+						<div class="fragment">
+							Requires <b>expressions</b> are used to define concepts<br />
+							<pre><code data-trim data-noescape class="cpp">
+template&lt;typename T&gt;
+concept Addable = <mark>requires</mark> (T x) { x + x; };
+							</code></pre>
+						</div>
+						<p class="fragment">
+						They return bool, and describe the constraints
+						</p>
+					</section>
+					<section>
+						There is also an "ad-hoc constraint", in which the <code>requires</code> clause is used twice
+						<pre><code data-trim data-noescape class="cpp">
+template&lt;typename T&gt;
+    requires requires (T x) { x + x; }
+T add(T a, T b) { return a + b; }
+						</code></pre>
+					</section>
+					<section>
+						<h3><a href="https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error">SFINAE</a></h3>
+						<p class="fragment">
+						"Substitution Failure Is Not An Error"
+						</p>
+						<aside class="notes">
+							When creating a candidate set for overload resolution, some (or all) candidates of that set may be the result of instantiated templates with (potentially deduced) template arguments substituted for the corresponding template parameters. If an error occurs during the substitution of a set of arguments for any given template, the compiler removes the potential overload from the candidate set instead of stopping with a compilation error, provided the substitution error is one the C++ standard grants such treatment.[2] If one or more candidates remain and overload resolution succeeds, the invocation is well-formed.
+						</aside>
+						<p class="fragment">
+						Before concepts, you could still
+						Concepts still require SFINAE to operate, but can
+						</p>
 					</section>
 				</section>
 
