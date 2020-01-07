@@ -288,29 +288,31 @@ T add(T a, T b) { return a + b; }
 					</section>
 					<section>
 						<h3><a href="https://en.wiktionary.org/wiki/subsume">Subsumption</a></h3>
-						Subsumption relationship defines partial order of constraints, which is used to determine:
+						Subsumption is a relationship that defines partial order of constraints, which is used to determine:
 						<ul><small>
 							<br />
 							<li>
 								the best viable candidate for a non-template function in overload resolution
 							</li>
-							<br />
 							<li>
 								the address of a non-template function in an overload set
 							</li>
-							<br />
 							<li>
 								the best match for a template template argument
 							</li>
-							<br />
 							<li>
 								partial ordering of class template specializations
 							</li>
-							<br />
 							<li>
 								partial ordering of function templates
 							</li>
 						</small></ul>
+						<aside class="notes">
+							B subsumes A if A must be true in order for B to be true
+						</aside>
+						<p class="fragment">
+						<code>random_access_iterator</code> subsumes <code>bidirectional_iterator</code>, which subsumes <code>forward_iterator</code>, etc.
+						</p>
 					</section>
 				</section>
 
