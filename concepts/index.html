@@ -280,9 +280,37 @@ T add(T a, T b) { return a + b; }
 							When creating a candidate set for overload resolution, some (or all) candidates of that set may be the result of instantiated templates with (potentially deduced) template arguments substituted for the corresponding template parameters. If an error occurs during the substitution of a set of arguments for any given template, the compiler removes the potential overload from the candidate set instead of stopping with a compilation error, provided the substitution error is one the C++ standard grants such treatment.[2] If one or more candidates remain and overload resolution succeeds, the invocation is well-formed.
 						</aside>
 						<p class="fragment">
-						Before concepts, you could still
-						Concepts still require SFINAE to operate, but can
+						Before concepts, it was still possible to constrain templates using SFINAE
 						</p>
+						<p class="fragment">
+						However, concepts are easier to read, produce better error messages, and are subsumable
+						</p>
+					</section>
+					<section>
+						<h3><a href="https://en.wiktionary.org/wiki/subsume">Subsumption</a></h3>
+						Subsumption relationship defines partial order of constraints, which is used to determine:
+						<ul><small>
+							<br />
+							<li>
+								the best viable candidate for a non-template function in overload resolution
+							</li>
+							<br />
+							<li>
+								the address of a non-template function in an overload set
+							</li>
+							<br />
+							<li>
+								the best match for a template template argument
+							</li>
+							<br />
+							<li>
+								partial ordering of class template specializations
+							</li>
+							<br />
+							<li>
+								partial ordering of function templates
+							</li>
+						</small></ul>
 					</section>
 				</section>
 
