@@ -245,7 +245,7 @@ requires {
 					<section>
 						<h3>Requires <a href="https://en.cppreference.com/w/cpp/language/constraints#Requires_clauses"><b>clauses</b></a> and <a href="https://en.cppreference.com/w/cpp/language/constraints#Requires_expression"><b>expression</b></a></h3>
 						<div class="fragment">
-							Requires <b>clauses</b> are used to specify constraints
+							Requires <b>clauses</b> are used to specify constraints:
 							<pre><code data-trim data-noescape class="cpp">
 template&lt;typename T&gt; <mark>requires</mark> Addable&lt;T&gt;
 T add(T a, T b) { return a + b; }
@@ -253,7 +253,7 @@ T add(T a, T b) { return a + b; }
 						</div>
 						<br />
 						<div class="fragment">
-							Requires <b>expressions</b> are used to define concepts<br />
+							Requires <b>expressions</b> are used to define concepts:
 							<pre><code data-trim data-noescape class="cpp">
 template&lt;typename T&gt;
 concept Addable = <mark>requires</mark> (T x) { x + x; };
@@ -264,7 +264,7 @@ concept Addable = <mark>requires</mark> (T x) { x + x; };
 						</p>
 					</section>
 					<section>
-						There is also an "ad-hoc constraint", in which the <code>requires</code> clause is used twice
+						There is also an "ad-hoc constraint", in which the <code>requires</code> clause is used twice:
 						<pre><code data-trim data-noescape class="cpp">
 template&lt;typename T&gt;
     requires requires (T x) { x + x; }
