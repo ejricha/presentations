@@ -133,6 +133,111 @@ void TestConcepts(T t) { /* ... */ }
 					</section>
 				</section>
 
+				<section id="examples">
+					<section>
+						<aside class="notes">
+							Define the <code>IsPointer</code> concept used on the previous slide.<br />
+							This is a fairly terrible concept. It uses only a single type trait.
+						</aside>
+						<h3>Simple example concept</h3>
+						<pre><code data-trim class="cpp">
+#include &lt;type_traits&gt;
+
+// Define a concept to see if a type is a pointer
+template &lt;typename T&gt;
+	concept IsPointer =
+	std::is_pointer_v&lt;T&gt;;
+						</code></pre>
+						<ul>
+							<li class="fragment">
+								Try not to define your own concepts
+							</li>
+							<li class="fragment">
+								If you do, they shouldn't be as simple as the ones above (which just uses a single type trait directly)
+							</li>
+						</ul>
+					</section>
+					<section>
+						<aside class="notes">
+							Here is a much longer one, from the CMCSTL2 library
+						</aside>
+						<h3>Sample CMCSTL2 library concept</h3>
+						<pre><code data-trim class="cpp">
+// clang-format off
+template &lt;typename T&gt;
+META_CONCEPT Integral = requires
+{
+  typename T::type;
+  typename T::value_type;
+  typename T::type::value_type;
+}
+&& Same&lt;typename T::value_type, typename T::type::value_type&gt;
+&& std::is_integral_v&lt;typename T::value_type&gt;
+&& requires
+{
+#ifdef META_HAS_P1084
+  { T::value } -&gt; Same&lt;const typename T::value_type&&gt;
+#else
+  T::value;
+  requires Same&lt;decltype(T::value), const typename T::value_type&gt;
+#endif
+  typename detail::require_constant&lt;T::value&gt;
+
+#ifdef META_HAS_P1084
+  { T::type::value } -&gt; Same&lt;const typename T::value_type&&gt;
+#else
+  T::type::value;
+  requires Same&lt;decltype(T::type::value), const typename T::value_type&gt;
+#endif
+  typename detail::require_constant&lt;T::type::value&gt;
+  requires T::value == T::type::value;
+
+#ifdef META_HAS_P1084
+  { T{}() } -&gt; Same&lt;typename T::value_type&gt;
+#else
+  T{}();
+  requires Same&lt;decltype(T{}()), typename T::value_type&gt;
+#endif
+  typename detail::require_constant&lt;T{}()&gt;
+  requires T{}() == T::value;
+
+  requires std::is_convertible_v&lt;T, typename T::value_type>;
+};
+// clang-format on
+#endif // META_CONCEPT
+						</code></pre>
+					</section>
+					<section>
+						<h3>Multiple ways to specify concepts</h3>
+						<div class="fragment">
+							<aside class="notes">
+								<code>T::value</code> means that the type T must have a value<br />
+								If any line returns false, the concept fails<br />
+								Also note that all lines must end with a semicolon
+							</aside>
+							Pre-<a href="http://wg21.link/p1084">P1084</a>, this was how concepts had to be specified:
+							<pre><code data-trim class="cpp">
+requires {
+  T::value;
+  requires Same&lt;decltype(T::value), const typename T::value_type&gt;;
+};
+							</code></pre>
+						</div>
+						<br />
+						<div class="fragment">
+							<aside class="notes">
+								
+							</aside>
+							This is a more concise way to specify the same thing:
+							<pre><code data-trim data-noescape class="cpp">
+requires {
+  <mark>{ T::value } -&gt;</mark> Same&lt;const typename T::value_type&&gt;;
+};
+							</code></pre>
+						</div>
+					</section>
+				</section>
+
 				<section id="definitions">
 					<section>
 						<h1>Definitions</h1>
