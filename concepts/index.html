@@ -468,26 +468,29 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/assignable_from">assignable_from</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/assignable_from">assignable_from</a>&lt;LHS, RHS&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable">swappable</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff an expression of type <code>RHS</code> can be<br />
+										assigned to an lvalue of type <code>LHS</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable_with">swappable_with</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable">swappable</a>&lt;T&gt;</code>
+										<br />
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff lvalues of type <code>T</code> are swappable
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/swappable">swappable_with</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff expressions of types <code>T</code> and <code>U</code><br />
+										are swappable with each other
 									</td>
 								</tr>
 							</table>
@@ -507,42 +510,47 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/destructible">destructible</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/destructible">destructible</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> is <code>nothrow</code> destructible
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/default_constructible">default_constructible</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T, ... Args&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/move_constructible">move_constructible</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code><a href="https://en.cppreference.com/w/cpp/concepts/destructible">destructible</a>&lt;T&gt;</code> returns <code>true</code>,<br />
+										and <code>T</code> can be initialized with the given <code>Args</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/copy_constructible">copy_constructible</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/default_constructible">default_constructible</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T&gt;</code><br />
+										returns <code>true</code>, without any arguments
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/move_constructible">move_constructible</a>&lt;T&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff both <code><a href="https://en.cppreference.com/w/cpp/concepts/constructible_from">constructible_from</a>&lt;T, T&gt;</code>,<br />
+										and <code><a href="https://en.cppreference.com/w/cpp/concepts/convertible_to">convertible_to</a>&lt;T, T&gt;</code> return <code>true</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/copy_constructible">copy_constructible</a>&lt;T&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff <code><a href="https://en.cppreference.com/w/cpp/concepts/move_constructible">move_constructible</a>&lt;T&gt;</code> is true,<br />
+										and <code>T</code> is convertible to <code>T</code><br />
+										(with all sorts of referenceness and constness)
 									</td>
 								</tr>
 							</table>
@@ -562,42 +570,44 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/boolean">boolean</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable_with">equality_comparable_with</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> can be used in boolean contexts
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered">totally_ordered</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered_with">totally_ordered_with</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> can be compared to itself
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/XXX">XXX</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable_with</a>&lt;T, U&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> and <code>U</code> can be compared
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered">totally_ordered</a>&lt;T&gt;</code>
+									</td>
+									<td>
+										<code>true</code> if expressions of type <code>T</code> can be compared<br />
+										using operators <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, and <code>&gt;=</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/totally_ordered">totally_ordered_with</a>&lt;T, U&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff <code>T</code> and <code>U</code> can be compared<br />
+										using the same 6 operators above
 									</td>
 								</tr>
 							</table>
@@ -617,34 +627,37 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/movable">movable</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/movable">movable</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/copyable">copyable</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> is an object type that can be moved
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/semiregular">semiregular</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/copyable">copyable</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> is a <code><a href="https://en.cppreference.com/w/cpp/concepts/movable">movable</a></code> object type<br />
+										that can also be copied
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular">regular</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/semiregular">semiregular</a>&lt;T&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>T</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/copyable">copyable</a></code><br />
+										and <code><a href="https://en.cppreference.com/w/cpp/concepts/default_constructible">default_constructible</a></code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular">regular</a>&lt;T&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff <code>T</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/semiregular">semiregular</a></code><br />
+										and <code><a href="https://en.cppreference.com/w/cpp/concepts/equality_comparable">equality_comparable</a></code>
 									</td>
 								</tr>
 							</table>
@@ -664,42 +677,47 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;F ... Args&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/regular_invocable">regular_invocable</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff callable type <code>F</code> can be called<br />
+										with a set of arguments <code>Args</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">regular_invocable</a>&lt;F ... Args&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/relation">relation</a>&lt;T, U&gt;</code>
-									</td>
-									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>F</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a></code>,<br />
+										and <code>F</code> doesn't modify the <code>Args</code>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/strict_weak_order">strict_weak_order</a>&lt;T, U&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;F ... Args&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> and <code>U</code>
+										<code>true</code> iff <code>F</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">regular_invocable</a></code>,<br />
+										and produces a boolean result
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/relation">relation</a>&lt;R, T, U&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff <code>R</code> is a binary <a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a></code>,<br />
+										and can be called with the types <code>T</code> and <code>U</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/strict_weak_order">strict_weak_order</a>&lt;R, T, U&gt;</code>
+									</td>
+									<td>
+										<code>true</code> iff <code><a href="https://en.cppreference.com/w/cpp/concepts/relation">relation</a>&lt;R, T, U&gt;</code> returns <code>true</code>,<br />
+										and <code>R</code> imposes a <a href="https://en.wikipedia.org/wiki/Weak_ordering#Strict_weak_orderings">strict weak ordering</a>
 									</td>
 								</tr>
 							</table>
