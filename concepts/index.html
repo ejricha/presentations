@@ -60,6 +60,9 @@
 					</section>
 					<section>
 						<h2>Normal C++ functions</h2>
+						<aside class="notes">
+							Here the <code>TestConcrete()</code> function takes exactly one argument, and participates in overload resolution
+						</aside>
 						<pre><code data-trim="" data-noescape="" class="cpp">
 // Pass an integer
 void TestConcrete(int i) { /* ... */ }
@@ -86,6 +89,9 @@ void TestConcrete(const BaseClass* base) { /* ... */ }
 					</section>
 					<section>
 						<h2>Templated functions</h2>
+						<aside class="notes">
+							Here <code>TestTemplate()</code> still takes one argument, and uses function template specialization (and SFINAE) to figure out which version to call
+						</aside>
 						<pre><code data-trim="" data-noescape="" class="cpp">
 // Pass an unconstrained template parameter T
 template &lt;typename T&gt;
@@ -110,6 +116,9 @@ void TestTemplate&lt;BaseClass*&gt;(BaseClass* base) { /* ... */ }
 					</section>
 					<section>
 						<h2>Constrained with concepts</h2>
+						<aside class="notes">
+							Now there are a few constrained versions of <code>TestConcepts()</code>, as well as one to fall back on (though there doesn't really need to be)
+						</aside>
 						<pre><code data-trim="" data-noescape="" class="cpp">
 // Same unconstrained function template
 template &lt;typename T&gt;
