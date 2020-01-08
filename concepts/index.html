@@ -158,56 +158,6 @@ template &lt;typename T&gt;
 						</ul>
 					</section>
 					<section>
-						<aside class="notes">
-							Here is a much longer one, from the CMCSTL2 library
-						</aside>
-						<h3>Sample CMCSTL2 library concept</h3>
-						<pre><code data-trim class="cpp">
-// clang-format off
-template &lt;typename T&gt;
-META_CONCEPT Integral = requires
-{
-  typename T::type;
-  typename T::value_type;
-  typename T::type::value_type;
-}
-&& Same&lt;typename T::value_type, typename T::type::value_type&gt;
-&& std::is_integral_v&lt;typename T::value_type&gt;
-&& requires
-{
-#ifdef META_HAS_P1084
-  { T::value } -&gt; Same&lt;const typename T::value_type&&gt;
-#else
-  T::value;
-  requires Same&lt;decltype(T::value), const typename T::value_type&gt;
-#endif
-  typename detail::require_constant&lt;T::value&gt;
-
-#ifdef META_HAS_P1084
-  { T::type::value } -&gt; Same&lt;const typename T::value_type&&gt;
-#else
-  T::type::value;
-  requires Same&lt;decltype(T::type::value), const typename T::value_type&gt;
-#endif
-  typename detail::require_constant&lt;T::type::value&gt;
-  requires T::value == T::type::value;
-
-#ifdef META_HAS_P1084
-  { T{}() } -&gt; Same&lt;typename T::value_type&gt;
-#else
-  T{}();
-  requires Same&lt;decltype(T{}()), typename T::value_type&gt;
-#endif
-  typename detail::require_constant&lt;T{}()&gt;
-  requires T{}() == T::value;
-
-  requires std::is_convertible_v&lt;T, typename T::value_type>;
-};
-// clang-format on
-#endif // META_CONCEPT
-						</code></pre>
-					</section>
-					<section>
 						<h3>Multiple ways to specify concepts</h3>
 						<div class="fragment">
 							<aside class="notes">
