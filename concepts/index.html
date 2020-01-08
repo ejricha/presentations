@@ -531,10 +531,10 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/boolean">boolean</a>&lt;T&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/boolean">boolean</a>&lt;B&gt;</code>
 									</td>
 									<td>
-										<code>true</code> iff <code>T</code> can be used in boolean contexts
+										<code>true</code> iff <code>B</code> can be used in boolean contexts
 									</td>
 								</tr>
 								<tr>
@@ -638,7 +638,7 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;F ... Args&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a>&lt;F, ... Args&gt;</code>
 									</td>
 									<td>
 										<code>true</code> iff callable type <code>F</code> can be called<br />
@@ -647,7 +647,7 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">regular_invocable</a>&lt;F ... Args&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">regular_invocable</a>&lt;F, ... Args&gt;</code>
 									</td>
 									<td>
 										<code>true</code> iff <code>F</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">invocable</a></code>,<br />
@@ -656,7 +656,7 @@ concept same_as =
 								</tr>
 								<tr>
 									<td>
-										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;F ... Args&gt;</code>
+										<code><a href="https://en.cppreference.com/w/cpp/concepts/predicate">predicate</a>&lt;F, ... Args&gt;</code>
 									</td>
 									<td>
 										<code>true</code> iff <code>F</code> is <code><a href="https://en.cppreference.com/w/cpp/concepts/invocable">regular_invocable</a></code>,<br />
