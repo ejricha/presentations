@@ -1,0 +1,49 @@
+/*
+Monokai style - ported by Luigi Maselli - http://grigio.org
+*/
+
+/*
+Don't use ALL CAPS
+*/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5 {
+  text-transform: none;
+}
+
+/*
+Make <code> prettier
+*/
+.reveal .cpp {
+  font-size: 100%;
+}
+.reveal code {
+  font-family: 'Ubuntu Mono', 'Source Code Pro', monospace;
+  font-size: 90%;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion,
+.hljs-meta {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-title,
+.hljs-section,
+.hljs-type,
+.hljs-selector-id {
+  font-weight: bold;
+}

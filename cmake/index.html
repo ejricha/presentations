@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>Concepts in C++20</title>
+
+		<meta name="description" content="A Brief Introduction to Concepts in C++20" />
+		<meta name="author" content="Eric Richardson" />
+
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/reveal.css" />
+
+		<!-- Main theme, options black, white, league, sky, beige, simple, serif, blood, night, moon, and solarized -->
+		<link rel="stylesheet" href="css/theme/white.css" />
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Ubuntu+Mono&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="concepts/source_code_white.css" />
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- Start of the slides -->
+
+				<section id="title" data-markdown data-separator="\n---\n">
+# Modern CMake
+## An Introduction
+
+CppMaryland
+
+`2020-03-04`
+
+*Eric Richardson*
+				</section>
+
+				<section data-markdown data-separator="\n---\n">
+## Problem
+I want to create a library with a cyclic dependency
+
+---
+
+First, here's an example of building with static libs, which works just fine:
+```shell
+$ mkdir -p build_with_static2libs     
+$ cd build_with_static2libs
+$ cmake -DBUILD_SHARED_LIBS:BOOL=OFF ..
+...
+-- Configuring done
+-- Generating done
+```
+
+---
+
+By running [a script from my GitHub repo](https://github.com/ejricha/scripts/blob/master/bash/graph_dependencies.sh), you can get a clickable dependencies graph:
+```shell
+$ ~/software/github/ejricha/scripts/bash/graph_dependencies.sh
+```
+![](cmake/TestCycle.svg)
+
+---
+
+But if I try the same thing with shared libraries:
+```shell
+CMake Error: The inter-target dependency graph contains the following
+ strongly connected component (cycle):
+  "A" of type SHARED_LIBRARY
+    depends on "B" (weak)
+    depends on "C" (weak)
+  "B" of type SHARED_LIBRARY
+    depends on "C" (weak)
+    depends on "A" (weak)
+  "C" of type SHARED_LIBRARY
+    depends on "A" (weak)
+    depends on "B" (weak)
+At least one of these targets is not a STATIC_LIBRARY.  Cyclic dependencies
+ are allowed only among static libraries.
+CMake Generate step failed.  Build files cannot be regenerated correctly.
+```
+
+---
+
+Top-level CMakeLists.txt
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(TestCycle LANGUAGES CXX)
+
+add_subdirectory(ExecutableApp)
+add_subdirectory(LibraryA)
+add_subdirectory(LibraryB)
+add_subdirectory(LibraryC)
+```
+
+---
+
+`ExecutableApp/CMakeLists.txt`
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(TestCycleMain LANGUAGES CXX)
+
+add_executable(TestCycle test_cycle.cpp)
+
+# TestCycle depends on A
+target_link_libraries(TestCycle A)
+```
+
+---
+
+Create a circular dependency
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(LibraryA LANGUAGES CXX)
+add_library(A a.cpp)
+target_link_libraries(A B)
+```
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(LibraryB LANGUAGES CXX)
+add_library(B b.cpp)
+target_link_libraries(B C)
+```
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(LibraryC LANGUAGES CXX)
+add_library(C c.cpp)
+target_link_libraries(C A)
+```
+				</section>
+				
+				<section id="questions">
+					<h1>Questions?</h1>
+				</section>
+
+				<!-- End of the slides -->
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: false,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
