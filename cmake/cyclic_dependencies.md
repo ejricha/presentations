@@ -1,7 +1,6 @@
 ## Problem
 I want to create a library with a cyclic dependency
 
----
 
 First, here's an example of building with static libs, which works just fine:
 ```shell
@@ -13,7 +12,6 @@ $ cmake -DBUILD_SHARED_LIBS:BOOL=OFF ..
 -- Generating done
 ```
 
----
 
 By running [a script from my GitHub repo](https://github.com/ejricha/scripts/blob/master/bash/graph_dependencies.sh), you can get a clickable dependencies graph:
 ```shell
@@ -21,7 +19,6 @@ $ ~/software/github/ejricha/scripts/bash/graph_dependencies.sh
 ```
 ![](cmake/TestCycle.svg)
 
----
 
 But if I try the same thing with shared libraries:
 ```shell
@@ -43,7 +40,10 @@ CMake Generate step failed.  Build files cannot be regenerated correctly.
 
 ---
 
-Top-level CMakeLists.txt
+## Corresponding CMakeLists.txt files
+
+
+Top-level `CMakeLists.txt`
 ```cmake
 cmake_minimum_required(VERSION 3.15)
 project(TestCycle LANGUAGES CXX)
@@ -54,7 +54,6 @@ add_subdirectory(LibraryB)
 add_subdirectory(LibraryC)
 ```
 
----
 
 `ExecutableApp/CMakeLists.txt`
 ```cmake
@@ -67,7 +66,6 @@ add_executable(TestCycle test_cycle.cpp)
 target_link_libraries(TestCycle A)
 ```
 
----
 
 Create a circular dependency
 ```cmake
@@ -88,3 +86,5 @@ project(LibraryC LANGUAGES CXX)
 add_library(C c.cpp)
 target_link_libraries(C A)
 ```
+Note: These are the `CMakeLists.txt` files for LibraryA, LibraryB, and LibraryC, respectively.
+As previously stated, this only works for *static* libraries, not shared ones.
