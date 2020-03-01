@@ -4,10 +4,10 @@
 
 ## Add an executable
 ```cmake
-add_executable(app main.cpp)
+add_executable(App main.cpp)
 ```
 
-* The first argument (`app`) is the **target** to build
+* The first argument (`App`) is the **target** to build
 * It is followed by the **source** file(s) to build from
 
 *Header files can be found automatically, and are not usually listed*
@@ -30,23 +30,23 @@ Exactly one of the source files must define a `main()` function
 
 
 ### The suffix of an executable is OS-specific:
-* On Windows, target `app` will become `app.exe`
-* On Linux, there is no suffix, so it's just `app`
+* On Windows, target `App` will become `App.exe`
+* On Linux, there is no suffix, so it's just `App`
 
 You can override this by setting `CMAKE_EXECUTABLE_SUFFIX`:
 ```cmake
 set(CMAKE_EXECUTABLE_SUFFIX .bin)
 ```
-Now target `app` will produce executable `app.bin`
+Now target `App` will produce executable `App.bin`
 
 ---
 
 ## Add a library
 The syntax to add a library is very similar to that used to add an executable:
 ```cmake
-add_library(cat cat.cpp)
+add_library(Cat cat.cpp)
 ```
-* The first argument (`cat`) is still the name of the **target**
+* The first argument (`Cat`) is still the name of the **target**
 * The **source** file(s) follow
 
 Note: "How does CMake determine what kind of library to build?", I don't hear you asking
@@ -76,11 +76,18 @@ Before I go too far, does everyone understand the syntax of the documentation?
 ---
 
 ## Linking a library to an executable
-This is the next most common thing that you may want to do. If your application target `app` depends on your library target `cat`, you need to add the following *after you have defined both targets*:
+
+If `App` depends on `Cat`:
 ```cmake
-target_link_libraries(app PUBLIC cat)
+target_link_libraries(App PUBLIC Cat)
 ```
-The second argument `PUBLIC` says that both the symbols in `cat` and any of the symbols in libraries that `cat` depends on are visible to `app`
+* `PUBLIC` : the symbols in `Cat`, **and** any of the symbols in libraries that `Cat` depends on, are visible to `App`
+* `target_link_libraries` must come *after* the target is created
+* Can be used for applications, libraries, or other custom targets
+
+Note:
+This is the next most common thing that you may want to do. If your application target `App` depends on your library target `Cat`, you need to add the following *after you have defined both targets*
+
 
 
 TODO: Add examples of linking with all 3 link types
@@ -96,11 +103,12 @@ target_link_libraries(<target>
 
 A complex structure such as this is allowed:
 ```cmake
-target_link_libraries(cat
-    PUBLIC    a b
-    PRIVATE   c d
-    INTERFACE e
-    PUBLIC    f g
+target_link_libraries(Cat
+    PUBLIC    A B
+    PRIVATE   C D
+    INTERFACE E
+    PUBLIC    F G
+    )
 ```
 ![](cmake/VariousLinkTypes.svg)
 * `PUBLIC` produces solid lines
