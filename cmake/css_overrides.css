@@ -1,0 +1,27 @@
+/* All non-title text is left-aligned */
+.reveal p {
+	text-align: left;
+}
+.reveal ul {
+	display: block;
+}
+.reveal ol {
+	display: block;
+}
+
+/* Allow #left and #right ids */
+#left {
+	float: left;
+	width: 45%;
+}
+
+#right {
+	float: right;
+	width: 45%;
+}
+
+/* Allow a section to be very wide */
+/* TODO: fix this */
+#full {
+	width: 100%;
+}

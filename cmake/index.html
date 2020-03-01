@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="cmake/source_code_white.css" />
 
 		<!-- Custom stylesheets -->
-		<link rel="stylesheet" href="cmake/css_left_and_right.css" />
+		<link rel="stylesheet" href="cmake/css_overrides.css" />
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -90,6 +90,13 @@
 
 				<section
 					data-markdown="cmake/cyclic_dependencies.md"
+					data-separator="^\n---\n"
+					data-separator-vertical="^\n\n"
+					data-separator-notes="^Note:">
+				</section>
+
+				<section
+					data-markdown="cmake/organized_dependencies.md"
 					data-separator="^\n---\n"
 					data-separator-vertical="^\n\n"
 					data-separator-notes="^Note:">
