@@ -1,7 +1,4 @@
-/* All non-title text is left-aligned */
-.reveal p {
-	text-align: left;
-}
+/* Do not center-align lists */
 .reveal ul {
 	display: block;
 }
