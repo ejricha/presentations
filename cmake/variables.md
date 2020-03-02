@@ -115,9 +115,3 @@ Note:
 If you give your variables and cache variables the same name, expect weird things to happen.
 This example, the first time it was run pulled in the cache variable, but once it was set it reverted to the normal variable.
 Just don't do it.
-
----
-
-# Generator Expressions
-
-
