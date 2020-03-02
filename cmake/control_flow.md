@@ -62,13 +62,16 @@ Command can be joined with the normal boolean operators:
 
 Example:
 ```cmake
-# Perfectly legal
 set(A1 FALSE)
 if(((X EQUAL 3) OR (X EQUAL 7) OR (X EQUAL 14)) AND
 	NOT ((Y EQUAL 4) OR (Y EQUAL 12) OR (Y EQUAL 18)))
 	set(A1 TRUE)
 endif()
+```
 
+
+Here is a much more readable way:
+```cmake
 # More readable
 set(A2 FALSE)
 set(A2_X FALSE)
@@ -82,11 +85,51 @@ endif()
 if(A2_X AND A2_Y)
 	set(A2 TRUE)
 endif()
+```
 
+
+We can confirm that our last two examples produce the same result:
+```cmake
 # Ensure that the variables match
 if(NOT A1 STREQUAL A2)
 	message(FATAL_ERROR "A1 (${A1}) != A2 (${A2}) [X=${X}, Y=${Y}]")
 else()
+```
+
+
+### Types of comparisons
+
+Numbers | Strings | Versions
+--- | --- | ---
+`LESS` | `STRLESS` | `VERSION_LESS`
+`LESSEQUAL` | `STRLESSEQUAL` | `VERSION_LESSEQUAL`
+`EQUAL` | `STREQUAL` | `VERSION_EQUAL`
+`GREATEREQUAL` | `STRGREATEREQUAL` | `VERSION_GREATEREQUAL`
+`GREATER` | `STRGREATER` | `VERSION_GREATER`
+
+
+Example of version comparisons
+```cmake
+set(versionA 1.2    1.2    1.2.3  2.0.1  1.8.2  1.7.3)
+set(versionB 1.2.0  1.2.3  1.2    1.9.7  2      1.11.1)
+list(LENGTH versionA listLength)
+math(EXPR lastIndex "${listLength} - 1")
+foreach(i RANGE 0 ${lastIndex})
+    list(GET versionA ${i} a)
+    list(GET versionB ${i} b)
+    if(${a} VERSION_LESS ${b})
+        message(NOTICE "  ${a} < ${b}")
+	...
+    endif()
+endforeach()
+```
+```bash
+  1.2 == 1.2.0
+  1.2 < 1.2.3
+  1.2.3 > 1.2
+  2.0.1 > 1.9.7
+  1.8.2 < 2
+  1.7.3 < 1.11.1
 ```
 
 ---
