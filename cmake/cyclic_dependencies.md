@@ -38,12 +38,8 @@ At least one of these targets is not a STATIC_LIBRARY.  Cyclic dependencies
 CMake Generate step failed.  Build files cannot be regenerated correctly.
 ```
 
----
 
-## Corresponding CMakeLists.txt files
-
-
-Top-level `CMakeLists.txt`
+### Top-level `CMakeLists.txt`
 ```cmake
 cmake_minimum_required(VERSION 3.15)
 project(TestCycle LANGUAGES CXX)
@@ -55,7 +51,7 @@ add_subdirectory(LibraryC)
 ```
 
 
-`ExecutableApp/CMakeLists.txt`
+### `ExecutableApp/CMakeLists.txt`
 ```cmake
 cmake_minimum_required(VERSION 3.15)
 project(TestCycleMain LANGUAGES CXX)
@@ -67,7 +63,7 @@ target_link_libraries(TestCycle A)
 ```
 
 
-Create a circular dependency
+### Create a circular dependency
 ```cmake
 cmake_minimum_required(VERSION 3.15)
 project(LibraryA LANGUAGES CXX)
