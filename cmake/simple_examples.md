@@ -29,12 +29,18 @@ int main() {
 
 Generating and running:
 ```shell
+$ ls -1
+  CMakeLists.txt
+  main.cpp
 $ mkdir build && cd build/
 $ cmake .. -GNinja
 $ ninja
 $ ./App
 Hello, world!
 ```
+
+Note:
+We will talk more about the `-G` "generator" flag later, but for now I'll just say that I prefer Ninja to the default of Make.
 
 
 Directory created:
@@ -102,11 +108,37 @@ Exactly one of the source files must define a `main()` function
 * On Windows, target `App` will become `App.exe`
 * On Linux, there is no suffix, so it's just `App`
 
-You can override this by setting `CMAKE_EXECUTABLE_SUFFIX`:
+This can be overridden with setting `CMAKE_EXECUTABLE_SUFFIX`:
 ```cmake
 set(CMAKE_EXECUTABLE_SUFFIX .bin)
 ```
 Now target `App` will produce executable `App.bin`
+
+
+You do not have to run `cmake` again, even though you changed the `CMakeLists.txt`:
+```shell
+$ ninja
+[0/1] Re-running CMake...
+-- Configuring done
+-- Generating done
+-- Build files have been written to: </build/dir>
+[1/1] Linking CXX executable App.bin
+```
+
+The new application was built:
+```shell
+$ ls -1
+App
+App.bin
+build.ninja
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+```
+
+Note:
+Every target has an implied dependency on all the `CMakeLists.txt` files, as well as `CMakeCache.txt` in the build directory.
+Also note that the original `App` is still there, and that not even a `ninja clean` will remove it.
 
 ---
 
