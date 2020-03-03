@@ -1,17 +1,84 @@
 # Simple Examples
 
----
 
 ## Add an executable
 ```cmake
+cmake_minimum_required(VERSION 3.15)
+project(HelloWorld)
+
 add_executable(App main.cpp)
 ```
-
+* The top-level `CMakeLists.txt` **must** start with the `cmake_minimum_required(VERSION <X>)`
+* The `project` should also be set
 * The first argument (`App`) is the **target** to build
 * It is followed by the **source** file(s) to build from
 
-*Header files can be found automatically, and are not usually listed*
+Note:
+Each `CMakeLists.txt` can define at most one unique project, though it may define many libraries, executables, or other targets.
+It's possible to keep only a single project for the entire repository, though usually the source tree is broken up into at least a few discrete projects.
 
+
+`main.cpp`:
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, world!\n";
+}
+```
+
+Generating and running:
+```shell
+$ mkdir build && cd build/
+$ cmake .. -GNinja
+$ ninja
+$ ./App
+Hello, world!
+```
+
+
+Directory created:
+```shell
++build
+ CMakeLists.txt
+ main.cpp
+```
+
+
+`cmake` run:
+```shell
++build/build.ninja
++build/CMakeCache.txt
++build/CMakeFiles
++build/CMakeFiles/3.17.20200216-g333a050
++build/CMakeFiles/3.17.20200216-g333a050/CMakeCXXCompiler.cmake
+ ...
++build/CMakeFiles/3.17.20200216-g333a050/CompilerIdCXX/tmp
++build/CMakeFiles/App.dir
++build/CMakeFiles/cmake.check_cache
++build/CMakeFiles/CMakeOutput.log
++build/CMakeFiles/CMakeTmp
++build/CMakeFiles/rules.ninja
++build/CMakeFiles/TargetDirectories.txt
++build/cmake_install.cmake
+```
+
+Note:
+The most important of these is `CMakeCache.txt`, where all the cache variables are stored.
+
+
+`ninja` run:
+```shell
++build/CMakeFiles/App.dir/main.cpp.o
++build/.ninja_log
++build/App
++build/.ninja_deps
+```
+
+Note:
+You can see that the object file was placed in a custom directory, and `App` was at the top-level of the build directory.
+
+---
 
 ### All options to [`add_executable`](https://cmake.org/cmake/help/latest/command/add_executable.html)
 ```cmake
@@ -22,6 +89,8 @@ add_executable(<name> [WIN32] [MACOSX_BUNDLE]
 * `<name>` : the name of the target to build into an executable
 * `WIN32` and `MACOSX_BUNDLE` : OS-specific
 * `EXCLUDE_FROM_ALL` : prevent a top-level `make all` (or similar) from building this target
+
+*Header files can be found automatically, and are not usually listed*
 
 Note:
 The target name must be globally unique, so sometimes you will see targets with a prefix of `${PROJECT_NAME}` or some other project-specific variable
