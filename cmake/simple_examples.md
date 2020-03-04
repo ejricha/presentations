@@ -190,10 +190,6 @@ Note:
 This is the next most common thing that you may want to do. If your application target `App` depends on your library target `Cat`, you need to add the following *after you have defined both targets*
 
 
-
-TODO: Add examples of linking with all 3 link types
-
-
 ### All options to [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html)
 ```cmake
 target_link_libraries(<target>

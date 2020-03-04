@@ -1,4 +1,4 @@
-# Including files and directories
+## Including files and directories
 
 * Use the `include` command to add additional CMake scripts
 * Use the `add_subdirectory` command to delve into directories
@@ -22,7 +22,7 @@ Note:
 The `binary_dir` is typically omitted, but it can be used to specify an alternate relative or absolute location for binary files.
 
 
-# Options for [`include`](https://cmake.org/cmake/help/latest/command/include.html)
+## Options for [`include`](https://cmake.org/cmake/help/latest/command/include.html)
 ```cmake
 include(<file|module> [OPTIONAL] [RESULT_VARIABLE <var>]
                       [NO_POLICY_SCOPE])
