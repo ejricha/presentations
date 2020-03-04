@@ -1,13 +1,56 @@
 ## Build types
 
-There are by default four build types:
-* `Debug` : All debugging information, including assertions
-* `RelWithDebInfo` : Some debug information, but no assertions
-* `Release` : Optimized for speed
-* `MinSizeRel` : Optimized for size rather than speed
+There are by default 4 build types:
+
+Name | Description
+--- | ---
+`Debug` | All debugging information, including assertions
+`RelWithDebInfo` | Some debug information, but no assertions
+`Release` | Release optimized for speed
+`MinSizeRel` | Release optimized for size
 
 Note:
 When launching CMake, you may have seen the `-DCMAKE_BUILD_TYPE=Debug` parameter passed in
+
+
+Here are the defaults on my Linux system using `g++` for `CMAKE_<LANG>_FLAGS_<TYPE>`:
+```list
+$ cmake .. -GNinja
+-- CMAKE_CXX_FLAGS =
+-- CMAKE_CXX_FLAGS_DEBUG = -g
+-- CMAKE_CXX_FLAGS_RELEASE = -O3 -DNDEBUG
+-- CMAKE_CXX_FLAGS_RELWITHDEBINFO = -O2 -g -DNDEBUG
+-- CMAKE_CXX_FLAGS_MINSIZEREL = -Os -DNDEBUG
+-- CMAKE_C_FLAGS =
+-- CMAKE_C_FLAGS_DEBUG = -g
+-- CMAKE_C_FLAGS_RELEASE = -O3 -DNDEBUG
+-- CMAKE_C_FLAGS_RELWITHDEBINFO = -O2 -g -DNDEBUG
+-- CMAKE_C_FLAGS_MINSIZEREL = -Os -DNDEBUG
+```
+
+Note:
+I also ran with `-DCMAKE_CXX_COMPILER:STRING=/usr/bin/clang` and got the exact same results
+
+
+And here is the `CMakeLists.txt` that produced that output:
+```cmake
+# Show the info for the different types
+set(Types Debug Release RelWithDebInfo MinSizeRel)
+foreach(LANG IN ITEMS CXX C)
+	set(Flags CMAKE_${LANG}_FLAGS)
+	message(STATUS "${Flags} = ${${Flags}}")
+	foreach(Type IN LISTS Types)
+		string(TOUPPER ${Type} TYPE)
+		set(Flags CMAKE_${LANG}_FLAGS_${TYPE})
+		message(STATUS "${Flags} = ${${Flags}}")
+	endforeach()
+endforeach()
+```
+
+Note:
+Notice that you can actually nest variables within variables.
+For example, `${Flags}` is set to a string like `"CMAKE_CXX_FLAGS_DEBUG"`, and `${${FLAGS}}` returns `${CMAKE_CXX_FLAGS_DEBUG}`.
+This is a good way to print both the name and the value of a variable.
 
 ---
 
