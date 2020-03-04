@@ -11,12 +11,7 @@ execute_process(COMMAND <cmd1> [<arguments>]
                 [WORKING_DIRECTORY <directory>]
                 [TIMEOUT <seconds>]
                 [RESULT_VARIABLE <variable>]
-                [RESULTS_VARIABLE <variable>]
-                [OUTPUT_VARIABLE <variable>]
-                [ERROR_VARIABLE <variable>]
-                [INPUT_FILE <file>]
-                [OUTPUT_FILE <file>]
-                [ERROR_FILE <file>]
+				...
                 [OUTPUT_QUIET]
                 [ERROR_QUIET]
                 [COMMAND_ECHO <where>]
@@ -33,7 +28,7 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${FileName} ${LinkName}
     )
 ```
-*It creates a file, with a symbolic link to the file*
+This command runs at configure time, and it creates a files with a symbolic link to it.
 
 
 ## Options for [`add_custom_command`](https://cmake.org/cmake/help/latest/command/add_custom_command.html)
@@ -68,3 +63,6 @@ add_custom_target(Name [ALL] [command1 [args1...]]
                   [COMMAND_EXPAND_LISTS]
                   [SOURCES src1 [src2...]])
 ```
+
+
+TODO: Show how `add_custom_command` and `add_custom_target` are used together.
