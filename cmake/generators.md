@@ -69,6 +69,9 @@ cmake -G"Unix Makefiles"
 cmake -G "Visual Studio 16 2019"
 ```
 
+Note:
+Notice that quotes are required if the generator contains a space.
+
 
 To see what generators are available on your system:
 ```shell
@@ -131,5 +134,5 @@ cmake -GNinja ..
 This ensures that your build targets don't end up cluttering the source directory.
 
 Note:
-You might notice that in my example a few slides back my build directories sit next to the top-level CMakeLists.txt.
+You might notice that in my examples the build directories sit next to the top-level CMakeLists.txt.
 Craig Scott says that this hybrid approach is acceptable, what you really want to ensure is that you are building in a directory that can be easily removed without affecting any source code.

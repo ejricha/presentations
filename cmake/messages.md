@@ -1,6 +1,6 @@
 # Messages
 
-One important way to debug `CMakeLists.txt` files is by using the [message](https://cmake.org/cmake/help/latest/command/message.html) command:
+One important way to debug `CMakeLists.txt` files is by using the [`message`](https://cmake.org/cmake/help/latest/command/message.html) command:
 ```cmake
 message([<mode>] "message text" ...)
 ```
@@ -46,6 +46,7 @@ To make absolutely every message from CMake visible:
 ```shell
 cmake --log-level=TRACE ...
 ```
+<br />
 
 At least on my Linux system:
 * `STATUS` messages and below get sent to `stdout`

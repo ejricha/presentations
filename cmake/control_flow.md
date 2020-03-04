@@ -1,8 +1,8 @@
 # Control flow
 
 There aren't too many of these commands, but they all have a similar form. For a command `<x>`:
-* Start the command with `x()`
-* End the command with `end<x>()`
+* Start the command with `x(...)`
+* End the command with `endx()`
 
 For example:
 ```cmake
