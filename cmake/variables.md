@@ -16,11 +16,30 @@ Note:
 If you have a variable that you want to be able to configure on the command-line, this is a cache variable.
 
 
+## Several options for [`set`](https://cmake.org/cmake/help/latest/command/set.html)
+```cmake
+# Set a normal variable
+set(<variable> <value>... [PARENT_SCOPE])
+
+# Set a cache variable (cache entry)
+set(<variable> <value>... CACHE <type> <docstring> [FORCE])
+# (Where <type> is one of BOOL, FILEPATH, PATH, STRING, or INTERNAL)
+
+# Set an environment variable directly
+set(ENV{<variable>} [<value>])
+```
+
+Note:
+I will speak more about the `PARENT_SCOPE` option later when we talk about `function`s.
+I will speak no more of setting environment variables thus.
+
+
 Running the previous `CMakeLists.txt`:
 ```shell
 -- NormalVariable = A normal variable
 -- CacheVariable = A cache variable
 ```
+<br />
 
 Only the **cache** variable is stored in `CMakeCache.txt`:
 ```shell
@@ -29,9 +48,6 @@ CMakeCache.txt-//Some description
 CMakeCache.txt:CacheVariable:STRING=A cache variable
 CMakeCache.txt-
 ```
-
-If you have a variable that you want to be able to configure on the command-line, this is a cache variable.
-For example, the previous
 
 
 Here is the output from a few different builds
@@ -53,9 +69,9 @@ CacheVariable:STRING=String with escaped spaces
 ```
 
 
-Note that once a cache variable is set, it never resets to what is in the `CMakeLists.txt`:
+Note that once a cache variable is set, it never resets to what is in the `CMakeLists.txt`.
 
-The only way to get it back is to modify or delete `CMakeCache.txt`
+The only way to get it back is to modify or delete `CMakeCache.txt`:
 ```bash
 $ cmake .. -DCacheVariable:STRING="Permanent override"
 -- CacheVariable = Permanent override
@@ -71,7 +87,7 @@ $ cmake ..
 
 
 ## More about `CMakeCache.txt`
-Sits at the top-level of the build directory, and contains all of the information about the build
+Sits at the top-level of the build directory, and contains all of the information about the build.
 
 Modifying (or even `touch`ing) this file will result in every `CMakeLists.txt` file being processed again the next time a configure or generate step runs.
 
@@ -86,40 +102,43 @@ A variable can hold one of the following:
 ## Setting [`string`](https://cmake.org/cmake/help/latest/command/string.html) variables
 
 ```cmake
-Manipulation
-  string(APPEND <string-var> [<input>...])
-  string(PREPEND <string-var> [<input>...])
-  string(CONCAT <out-var> [<input>...])
-  string(JOIN <glue> <out-var> [<input>...])
-  string(TOLOWER <string> <out-var>)
-  string(TOUPPER <string> <out-var>)
-  string(LENGTH <string> <out-var>)
-  string(SUBSTRING <string> <begin> <length> <out-var>)
-  string(STRIP <string> <out-var>)
+# Manipulation
+  string(TOLOWER     <string> <out-var>)
+  string(TOUPPER     <string> <out-var>)
+  string(LENGTH      <string> <out-var>)
+  string(STRIP       <string> <out-var>)
   string(GENEX_STRIP <string> <out-var>)
-  string(REPEAT <string> <count> <out-var>)
+  string(APPEND      <string-var> [<input>...])
+  string(PREPEND     <string-var> [<input>...])
+  string(CONCAT      <out-var> [<input>...])
+  string(JOIN        <glue> <out-var> [<input>...])
+  string(SUBSTRING   <string> <begin> <length> <out-var>)
+  string(REPEAT      <string> <count> <out-var>)
 ```
 
 
 More `string` operations:
 ```cmake
-Search and Replace
-  string(FIND <string> <substring> <out-var> [...])
+# Search and Replace
+  string(FIND    <string> <substring> <out-var> [...])
   string(REPLACE <match-string> <replace-string> <out-var> <input>...)
 
-Regular Expressions
-  string(REGEX MATCH <match-regex> <out-var> <input>...)
+# Regular Expressions
+  string(REGEX MATCH    <match-regex> <out-var> <input>...)
   string(REGEX MATCHALL <match-regex> <out-var> <input>...)
-  string(REGEX REPLACE <match-regex> <replace-expr> <out-var> <input>...)
+  string(REGEX REPLACE  <match-regex> <replace-expr> <out-var> <input>...)
 
-
-Comparison
+# Comparison
   string(COMPARE <op> <string1> <string2> <out-var>)
 
-Hashing
+# Hashing
   string(<HASH> <out-var> <input>)
+```
 
-Generation
+
+Even more `string` operations:
+```cmake
+# Generation
   string(ASCII <number>... <out-var>)
   string(CONFIGURE <string> <out-var> [...])
   string(MAKE_C_IDENTIFIER <string> <out-var>)
