@@ -28,7 +28,7 @@ Useful commands:
 * `tar`
 
 
-For more information, see https://cmake.org/cmake/help/latest/manual/cmake.1.html#run-a-command-line-tool, or run `cmake -E`:
+For more information, see [the CMake manual](https://cmake.org/cmake/help/latest/manual/cmake.1.html#run-a-command-line-tool), or run `cmake -E`:
 ```shell
 $ cmake -E
 Usage: cmake -E <command> [arguments...]
