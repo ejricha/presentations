@@ -1,5 +1,18 @@
 ## Problem
-I want to create a library with a cyclic dependency:
+I want to create a library with a cyclic dependency
+
+
+Here is a graph of the project that I created, generated with `cmake --graphviz=...`:
+
+![](cmake/TestCycle.svg)
+
+Note:
+By running [a script from my GitHub repo](https://github.com/ejricha/scripts/blob/master/bash/graph_dependencies.sh), you can get a clickable dependencies graph:
+```shell
+$ ~/software/github/ejricha/scripts/bash/graph_dependencies.sh
+
+```
+
 
 ### Top-level `CMakeLists.txt`
 ```cmake
@@ -18,42 +31,35 @@ add_subdirectory(LibraryC)
 add_executable(TestCycle test_cycle.cpp)
 
 # TestCycle depends on A
-target_link_libraries(TestCycle A)
+target_link_libraries(TestCycle PUBLIC A)
 ```
 
 ### Create a circular dependency
 ```cmake
 # A depends on B
 add_library(A a.cpp)
-target_link_libraries(A B)
+target_link_libraries(A PUBLIC B)
 
 # B depends on C
 add_library(B b.cpp)
-target_link_libraries(B C)
+target_link_libraries(B PUBLIC C)
 
 # C depends on A
 add_library(C c.cpp)
-target_link_libraries(C A)
+target_link_libraries(C PUBLIC A)
 ```
 Note: These are the `CMakeLists.txt` files for LibraryA, LibraryB, and LibraryC, respectively.
-As previously stated, this only works for *static* libraries, not shared ones.
+I specified public linking, but I omitted the library types, because I want to control that via the `BUILD_SHARED_LIBS` variable.
+
 
 First, here's an example of building with static libs, which works just fine:
 ```shell
-$ mkdir -p build_with_static2libs     
-$ cd build_with_static2libs
-$ cmake -DBUILD_SHARED_LIBS:BOOL=OFF ..
+$ mkdir -p build && cd build
+$ cmake .. -GNinja -DBUILD_SHARED_LIBS:BOOL=OFF
 ...
 -- Configuring done
 -- Generating done
 ```
-
-
-By running [a script from my GitHub repo](https://github.com/ejricha/scripts/blob/master/bash/graph_dependencies.sh), you can get a clickable dependencies graph:
-```shell
-$ ~/software/github/ejricha/scripts/bash/graph_dependencies.sh
-```
-![](cmake/TestCycle.svg)
 
 
 But if I try the same thing with shared libraries:
