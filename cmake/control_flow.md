@@ -163,6 +163,10 @@ foreach(Var RANGE 21 25 2)
 foreach(Var IN ITEMS 91 92 93 94 95)
 ```
 
+Note:
+The same `break()` and `continue()` commands that were valid for `if` statements are also valid here.
+
+
 ### Output
 ```shell
 $ cmake ..
