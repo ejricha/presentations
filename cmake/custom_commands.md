@@ -28,7 +28,7 @@ execute_process(
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${FileName} ${LinkName}
     )
 ```
-This command runs at configure time, and it creates a files with a symbolic link to it.
+This command runs at configure time, and it creates a files with a symbolic link to it
 
 
 ## Options for [`add_custom_command`](https://cmake.org/cmake/help/latest/command/add_custom_command.html)

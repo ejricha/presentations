@@ -109,20 +109,20 @@ Remember the concept of build types, e.g. `Release`, `Debug`, etc.? Here is wher
 
 ## Multi-configuration
 
-* These generators do *not* require a different build directory for each build type.
-* It doesn't really make sense to have a `build_MSVC_Debug` directory, because every build directory for MSVC is capable of switching build types.
+* These generators do *not* require a different build directory for each build type
+* It doesn't really make sense to have a `build_MSVC_Debug` directory, because every build directory for MSVC is capable of switching build types
 
 *(The way it does this is to have a subdirectory for each build type that is used)*
 
 
 ### A brief word about build locations
 
-* Back in the days of `make` and `autotools`, applications and binaries were often mixed in with source code.
-* This is referred to as an "**in-source**" build.
+* Back in the days of `make` and `autotools`, applications and binaries were often mixed in with source code
+* This is referred to as an "**in-source**" build
 * This required keeping a close eye on `.gitignore` files, and excluding things that were not really source code
 
 
-CMake is a little different, as the most common method is using an "**out-of-source**" build directory.
+CMake is a little different, as the most common method is using an "**out-of-source**" build directory
 
 The normal use case looks something like this:
 ```shell
@@ -130,7 +130,7 @@ mkdir -p build && cd build
 cmake -GNinja ..
 ```
 
-This ensures that your build targets don't end up cluttering the source directory.
+This ensures that your build targets don't end up cluttering the source directory
 
 Note:
 You might notice that in my examples the build directories sit next to the top-level CMakeLists.txt.

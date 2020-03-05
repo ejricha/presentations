@@ -4,7 +4,7 @@ The `function` and `macro` commands are very similar, but have one main differen
 * Functions run in their own scope
 * Macros run in the caller's scope
 
-Calling a macro is equivalent to copying its contents directly (much like C/C++ macros).
+Calling a macro is equivalent to copying its contents directly (much like C/C++ macros)
 
 Note:
 It is possible to set a variable in a function in the caller's scope, by using the optional `PARENT_SCOPE` argument, but don't do this.
@@ -52,9 +52,11 @@ Note:
 Because `${arg}` is NOT defined in the caller's scope.
 
 
-Functions and macros *can* be overloaded, but it's not really recommended.
+Functions and macros *can* be overloaded, but it's not really recommended
 
-When a function is overloaded, the original version of the function is still available, with a `_` prefix. This means that a function can only be overloaded once, because the second time that it is overloaded the original version disappears.
+When a function is overloaded, the original version of the function is still available, with a `_` prefix
+
+This means that a function can only be overloaded once, because the second time that it is overloaded the original version disappears
 
 Note:
 This is true whether the functions have the same signature or not.

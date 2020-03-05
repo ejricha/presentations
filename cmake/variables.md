@@ -69,7 +69,7 @@ CacheVariable:STRING=String with escaped spaces
 ```
 
 
-Note that once a cache variable is set, it never resets to what is in the `CMakeLists.txt`.
+Note that once a cache variable is set, it never resets to what is in the `CMakeLists.txt`
 
 The only way to get it back is to modify or delete `CMakeCache.txt`:
 ```bash
@@ -87,9 +87,9 @@ $ cmake ..
 
 
 ## More about `CMakeCache.txt`
-Sits at the top-level of the build directory, and contains all of the information about the build.
+Sits at the top-level of the build directory, and contains all of the information about the build
 
-Modifying (or even `touch`ing) this file will result in every `CMakeLists.txt` file being processed again the next time a configure or generate step runs.
+Modifying (or even `touch`ing) this file will result in every `CMakeLists.txt` file being processed again the next time a configure or generate step runs
 
 
 ## Setting variables
@@ -201,7 +201,7 @@ else()
 	message(STATUS "Variable (${Variable}) is Normal")
 endif()
 ```
-...but they really shouldn't:
+...but they really shouldn't
 ```shell
 $ cmake ..
 -- CacheVariable = A cache variable
