@@ -9,8 +9,8 @@ include(dir2/HelperScript.cmake)
 ```
 
 Note:
-The `add_subdirectory` command expects the file `dir1/CMakeLists.txt` to exist, and this is what will be processed
-The `include` command is typically used 
+The `add_subdirectory` command expects the file `dir1/CMakeLists.txt` to exist, and this is what will be processed.
+The `include` command is typically used to add existing CMake helper scripts.
 
 
 ## Options for [`add_subdirectory`](https://cmake.org/cmake/help/latest/command/add_subdirectory.html)
@@ -30,3 +30,6 @@ include(<file|module> [OPTIONAL] [RESULT_VARIABLE <var>]
 * If `OPTIONAL` is present, no error will be raised if the file or module is not found
 * `RESULT_VARIABLE` will set `<var>` to the full filename, or `"NOTFOUND"`
 * The `NO_POLICY_SCOPE` option is useful if you actually want to pull policies from an external file
+
+Note:
+A module is the name of a CMake script without the `.cmake` extension.
