@@ -12,7 +12,6 @@ It is possible to set a variable in a function in the caller's scope, by using t
 
 Example of a [`function`](https://cmake.org/cmake/help/latest/command/function.html):
 ```cmake
-set(global
 function(F arg)
     if(DEFINED arg)
         message(STATUS "F : ${arg} is defined")
