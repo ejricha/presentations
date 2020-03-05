@@ -163,7 +163,7 @@ add_library(<name> [STATIC | SHARED | MODULE | OBJECT]
 * The **Library Type** comes next:
  * `STATIC` : a static library
  * `SHARED` : a shared library
- * `MODULE` : a shared library
+ * `MODULE` : a module (plug-in) library
  * If the type is omitted, the `BUILD_SHARED_LIBS` variable will be used to decide between `STATIC` and `SHARED`
 * `EXCLUDE_FROM_ALL` : same as for `add_executable(...)`
 
