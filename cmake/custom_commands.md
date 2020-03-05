@@ -63,6 +63,3 @@ add_custom_target(Name [ALL] [command1 [args1...]]
                   [COMMAND_EXPAND_LISTS]
                   [SOURCES src1 [src2...]])
 ```
-
-
-TODO: Show how `add_custom_command` and `add_custom_target` are used together.
