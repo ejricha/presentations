@@ -98,6 +98,11 @@ A variable can hold one of the following:
 * A list
 * A boolean
 
+Note:
+Underneath, they're all strings.
+A list is just a string with semicolons separating values.
+A boolean is just a string that is processed by special rules.
+
 
 ## Setting [`string`](https://cmake.org/cmake/help/latest/command/string.html) variables
 
