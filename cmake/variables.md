@@ -160,15 +160,15 @@ Lists are separated by semicolons, and there are a few useful commands that you 
 ```cmake
 Modification
   list(APPEND <list> [<element>...])
-  list(FILTER <list> {INCLUDE | EXCLUDE} REGEX <regex>)
-  list(INSERT <list> <index> [<element>...])
+  list(PREPEND <list> [<element>...])
   list(POP_BACK <list> [<out-var>...])
   list(POP_FRONT <list> [<out-var>...])
-  list(PREPEND <list> [<element>...])
+  list(INSERT <list> <index> [<element>...])
   list(REMOVE_ITEM <list> <value>...)
   list(REMOVE_AT <list> <index>...)
   list(REMOVE_DUPLICATES <list>)
   list(TRANSFORM <list> <ACTION> [...])
+  list(FILTER <list> {INCLUDE | EXCLUDE} REGEX <regex>)
 ```
 
 
