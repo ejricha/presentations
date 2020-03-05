@@ -83,7 +83,6 @@ Options
 The following generators are available on this platform (* marks default):
 * Unix Makefiles               = Generates standard UNIX makefiles.
   Ninja                        = Generates build.ninja files.
-  Ninja Multi-Config           = Generates build-<Config>.ninja files.
   CodeBlocks - Ninja           = Generates CodeBlocks project files.
   CodeLite - Unix Makefiles    = Generates CodeLite project files.
   Kate - Ninja                 = Generates Kate project files.
