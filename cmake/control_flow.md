@@ -54,7 +54,7 @@ Returns:
 * **False** : `0`, `OFF`, `NO`, `FALSE`, `N`, `IGNORE`, `NOTFOUND`, the empty string, or ends in the suffix `-NOTFOUND`
 
 
-Command can be joined with the normal boolean operators:
+Commands can be joined with the normal boolean operators:
 * `AND`
 * `OR`
 * `NOT`
@@ -102,9 +102,9 @@ else()
 Numbers | Strings | Versions
 --- | --- | ---
 `LESS` | `STRLESS` | `VERSION_LESS`
-`LESSEQUAL` | `STRLESSEQUAL` | `VERSION_LESSEQUAL`
+`LESS_EQUAL` | `STRLESS_EQUAL` | `VERSION_LESS_EQUAL`
 `EQUAL` | `STREQUAL` | `VERSION_EQUAL`
-`GREATEREQUAL` | `STRGREATEREQUAL` | `VERSION_GREATEREQUAL`
+`GREATER_EQUAL` | `STRGREATER_EQUAL` | `VERSION_GREATER_EQUAL`
 `GREATER` | `STRGREATER` | `VERSION_GREATER`
 
 
