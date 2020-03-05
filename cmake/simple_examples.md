@@ -10,7 +10,7 @@ add_executable(App main.cpp)
 ```
 * The top-level `CMakeLists.txt` **must** start with the `cmake_minimum_required(VERSION <X>)`
 * The `project` should also be set
-* The first argument (`App`) is the **target** to build
+* The first argument to `add_executable` (`App`) is the **target** to build
 * It is followed by the **source** file(s) to build from
 
 Note:
