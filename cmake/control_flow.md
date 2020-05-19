@@ -70,7 +70,7 @@ endif()
 ```
 
 
-Here is a much more readable way:
+Here is a slightly more readable way:
 ```cmake
 # More readable
 set(A2 FALSE)
@@ -87,6 +87,9 @@ if(A2_X AND A2_Y)
 endif()
 ```
 
+Note:
+Although it is slightly more readable, it does involve two additional `if()` statements, and two temporary variables. So it's still not the most concise or efficient.
+
 
 We can confirm that our last two examples produce the same result:
 ```cmake
@@ -94,7 +97,11 @@ We can confirm that our last two examples produce the same result:
 if(NOT A1 STREQUAL A2)
 	message(FATAL_ERROR "A1 (${A1}) != A2 (${A2}) [X=${X}, Y=${Y}]")
 else()
+	message(STATUS "A1 (${A1}) == A2 (${A2}) [X=${X}, Y=${Y}]")
+endif()
 ```
+
+When this was run, it made it all the way to the end without a "CMake Error", though it printed out a lot of `STATUS` messages along the way
 
 
 ### Types of comparisons
@@ -177,4 +184,4 @@ $ cmake ..
 ```
 
 Note:
-The single-argument `RANGE` command starts at 0.
+The single-argument `RANGE` command starts at 0. Which would be fine, except that it is *inclusive*, so spans the range [0, 5], which is 6 values.

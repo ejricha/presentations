@@ -1,6 +1,6 @@
 ## Build types
 
-There are by default 4 build types:
+The `CMAKE_BUILD_TYPE` cache variable is usually set to one of the following:
 
 Name | Description
 --- | ---
@@ -10,7 +10,7 @@ Name | Description
 `MinSizeRel` | Release optimized for size
 
 Note:
-When launching CMake, you may have seen the `-DCMAKE_BUILD_TYPE=Debug` parameter passed in
+When launching CMake, you may have seen the `-DCMAKE_BUILD_TYPE=Debug` parameter passed in.
 
 
 Here are the defaults on my Linux system using `g++` for `CMAKE_<LANG>_FLAGS_<TYPE>`:
@@ -29,7 +29,9 @@ $ cmake .. -GNinja
 ```
 
 Note:
-I also ran with `-DCMAKE_CXX_COMPILER:STRING=/usr/bin/clang` and got the exact same results
+Not only can you specify the flags for a default build type like `DEBUG`, you can also create a new one like `Test` or `Production`.
+
+I also ran with `-DCMAKE_CXX_COMPILER:STRING=/usr/bin/clang` and got the exact same results.
 
 
 And here is the `CMakeLists.txt` that produced that output:
@@ -51,6 +53,8 @@ Note:
 Notice that you can actually nest variables within variables.
 For example, `${Flags}` is set to a string like `"CMAKE_CXX_FLAGS_DEBUG"`, and `${${FLAGS}}` returns `${CMAKE_CXX_FLAGS_DEBUG}`.
 This is a good way to print both the name and the value of a variable.
+
+Also good to note is that while the `CMAKE_BUILD_TYPE` is CamelCase, the flags variables are always all-uppercase. I'm not positive how that would affect a custom build type like `Production`, but I would suspect it would be the same.
 
 ---
 

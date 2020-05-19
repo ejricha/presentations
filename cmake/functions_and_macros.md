@@ -2,7 +2,7 @@
 
 The `function` and `macro` commands are very similar, but have one main difference:
 * Functions run in their own scope
-* Macros run in the caller's scope
+* Macros run in *the caller's* scope
 
 Calling a macro is equivalent to copying its contents directly (much like C/C++ macros)
 

@@ -49,6 +49,9 @@ CMakeCache.txt:CacheVariable:STRING=A cache variable
 CMakeCache.txt-
 ```
 
+Note:
+The description string is also what appears when you hover over a cache variable in `cmake-gui`.
+
 
 Here is the output from a few different builds
 ```bash
@@ -158,7 +161,7 @@ Even more `string` operations:
 Lists are separated by semicolons, and there are a few useful commands that you can use to operate on them:
 
 ```cmake
-Modification
+# Modification
   list(APPEND <list> [<element>...])
   list(PREPEND <list> [<element>...])
   list(POP_BACK <list> [<out-var>...])
@@ -174,16 +177,16 @@ Modification
 
 More `list` operations:
 ```cmake
-Reading
+# Reading
   list(LENGTH <list> <out-var>)
   list(GET <list> <element index> [<index> ...] <out-var>)
   list(JOIN <list> <glue> <out-var>)
   list(SUBLIST <list> <begin> <length> <out-var>)
 
-Search
+# Search
   list(FIND <list> <value> <out-var>)
 
-Ordering
+# Ordering
   list(REVERSE <list>)
   list(SORT <list> [...])
 ```

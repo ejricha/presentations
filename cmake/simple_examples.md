@@ -64,8 +64,8 @@ Directory created:
 +build/CMakeFiles/cmake.check_cache
 +build/CMakeFiles/CMakeOutput.log
 +build/CMakeFiles/CMakeTmp
-+build/CMakeFiles/rules.ninja
 +build/CMakeFiles/TargetDirectories.txt
++build/rules.ninja
 +build/cmake_install.cmake
 ```
 
@@ -75,10 +75,10 @@ The most important of these is `CMakeCache.txt`, where all the cache variables a
 
 `ninja` run:
 ```shell
-+build/CMakeFiles/App.dir/main.cpp.o
-+build/.ninja_log
 +build/App
++build/CMakeFiles/App.dir/main.cpp.o
 +build/.ninja_deps
++build/.ninja_log
 ```
 
 Note:
@@ -99,7 +99,7 @@ add_executable(<name> [WIN32] [MACOSX_BUNDLE]
 *Header files can be found automatically, and are not usually listed*
 
 Note:
-The target name must be globally unique, so sometimes you will see targets with a prefix of `${PROJECT_NAME}` or some other project-specific variable
+The target name must be globally unique, so sometimes you will see targets with a prefix of `${PROJECT_NAME}` or some other project-specific variable.
 
 Exactly one of the source files must define a `main()` function
 
@@ -127,13 +127,14 @@ $ ninja
 
 The new application was built:
 ```shell
-$ ls -1
-App
-App.bin
-build.ninja
+$ ls -1vF
+App*
+App.bin*
 CMakeCache.txt
-CMakeFiles
+CMakeFiles/
+build.ninja
 cmake_install.cmake
+rules.ninja
 ```
 
 Note:
@@ -150,7 +151,7 @@ add_library(Cat cat.cpp)
 * The first argument (`Cat`) is still the name of the **target**
 * The **source** file(s) follow
 
-Note: "How does CMake determine what kind of library to build?", I don't hear you asking
+Note: We will talk more about how CMake determines what kind of library to build next.
 
 
 ### All options to [`add_library`](https://cmake.org/cmake/help/latest/command/add_library.html)
@@ -187,7 +188,7 @@ target_link_libraries(App PUBLIC Cat)
 * Can be used for applications, libraries, or other custom targets
 
 Note:
-This is the next most common thing that you may want to do. If your application target `App` depends on your library target `Cat`, you need to add the following *after you have defined both targets*
+This is the next most common thing that you may want to do. If your application target `App` depends on your library target `Cat`, you need to add the following *after you have defined both targets*.
 
 
 ### All options to [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html)
@@ -213,4 +214,4 @@ target_link_libraries(Cat
 * `INTERFACE` produces dotted lines
 
 Note:
-Clearly, CMake doesn't really care about whitespace. My recommendation is to put things on a single line, unless you are specifying more than one link type
+Clearly, CMake doesn't really care about whitespace. My recommendation is to put things on a single line, unless you are specifying more than one link type.
