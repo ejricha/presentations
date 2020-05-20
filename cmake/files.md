@@ -2,7 +2,7 @@
 
 Easy to get parts of a file path
 ```cmake
-set(FullFilePath /tmp/cmake_test/file.x.y.z)
+set(FullFilePath /tmp/cmake_test/f.x.y.z)
 get_filename_component(FileDir ${FullFilePath} DIRECTORY)
 get_filename_component(FileName ${FullFilePath} NAME)
 get_filename_component(FileWithoutLongestExtension ${FullFilePath} NAME_WE)
@@ -11,11 +11,11 @@ get_filename_component(FileWithoutLastExtension ${FullFilePath} NAME_WLE)
 get_filename_component(FileLastExtension ${FullFilePath} LAST_EXT)
 ```
 ```shell
--- [/tmp/cmake_test/file.x.y.z]
+-- [/tmp/cmake_test/f.x.y.z]
 --   DIRECTORY : /tmp/cmake_test
---   NAME      : file.x.y.z
---   NAME_WE   : file
+--   NAME      : f.x.y.z
+--   NAME_WE   : f
 --   EXT       : .x.y.z
---   NAME_WLE  : file.x.y
+--   NAME_WLE  : f.x.y
 --   LAST_EXT  : .z
 ```

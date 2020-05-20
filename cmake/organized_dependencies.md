@@ -13,7 +13,3 @@ By trimming the dependencies to only the necessary ones, you end up with a much 
 <div id="full">
 	<img src="cmake/DepsLess.svg" />
 </div>
-
-Note:
-All "facts" presented here are really just opinions held by the author, and some of them probably aren't even any good.
-I am planning on publishing a blog post with these results at some point, so if you see any obvious issues with my approach please let me know.
