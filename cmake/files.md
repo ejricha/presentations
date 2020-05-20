@@ -19,3 +19,48 @@ get_filename_component(FileLastExtension ${FullFilePath} LAST_EXT)
 --   NAME_WLE  : f.x.y
 --   LAST_EXT  : .z
 ```
+
+
+## Using the [`file`](https://cmake.org/cmake/help/latest/command/file.html) command
+```cmake
+# Reading
+  file(READ <filename> <out-var> [...])
+  file(STRINGS <filename> <out-var> [...])
+  file(<HASH> <filename> <out-var>)
+  file(TIMESTAMP <filename> <out-var> [...])
+  file(GET_RUNTIME_DEPENDENCIES [...])
+
+# Writing
+  file({WRITE | APPEND} <filename> <content>...)
+  file({TOUCH | TOUCH_NOCREATE} [<file>...])
+  file(GENERATE OUTPUT <output-file> [...])
+```
+
+
+More `file` options:
+```cmake
+# Filesystem
+  file({GLOB | GLOB_RECURSE} <out-var> [...] [<globbing-expr>...])
+  file(RENAME <oldname> <newname>)
+  file({REMOVE | REMOVE_RECURSE } [<files>...])
+  file(MAKE_DIRECTORY [<dir>...])
+  file({COPY | INSTALL} <file>... DESTINATION <dir> [...])
+  file(SIZE <filename> <out-var>)
+  file(READ_SYMLINK <linkname> <out-var>)
+  file(CREATE_LINK <original> <linkname> [...])
+```
+
+
+Even more `file` options:
+```cmake
+# Path Conversion
+  file(RELATIVE_PATH <out-var> <directory> <file>)
+  file({TO_CMAKE_PATH | TO_NATIVE_PATH} <path> <out-var>)
+
+# Transfer
+  file(DOWNLOAD <url> <file> [...])
+  file(UPLOAD <file> <url> [...])
+
+# Locking
+  file(LOCK <path> [...])
+```
