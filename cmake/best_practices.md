@@ -22,47 +22,11 @@ target_sources(...)
 
 
 ### Explicitly call out all target dependencies
-Even though you could set target dependencies using the `file(GLOB ...)` command, you should prefer to list them explicitly:
+As previously stated, prefer this:
 ```cmake
-file(GLOB CppFiles "*.cpp")
+add_executable(targetExplicit main.cpp a.cpp b.cpp)
+```
+...to this:
+```cmake
 add_executable(targetFromGlob "${CppFiles}")
 ```
-
-
-Here's an example of why that is a bad idea:
-```shell
-$ ls -1vF *.cpp
-a.cpp
-b.cpp
-$ mkdir build && cd build/
-$ cmake ..
-$ make
-Scanning dependencies of target targetFromGlob
-[ 33%] Building CXX object CMakeFiles/targetFromGlob.dir/a.cpp.o
-[ 66%] Building CXX object CMakeFiles/targetFromGlob.dir/b.cpp.o
-[100%] Linking CXX executable targetFromGlob
-[100%] Built target targetFromGlob
-```
-This is fine: it picks up both `a.cpp` and `b.cpp` from the top-level directory
-
-
-Now, let's add a new file:
-```shell
-$ touch ../c.cpp
-$ make
-[100%] Built target targetFromGlob
-```
-Notice that `make` doesn't know that it should care about *all* new `.cpp` files
-
-
-Only CMake knows which files it should depend on:
-```cmake
-$ touch CMakeCache.txt 
-$ make
-...
-Scanning dependencies of target targetFromGlob
-[ 25%] Building CXX object CMakeFiles/targetFromGlob.dir/c.cpp.o
-[ 50%] Linking CXX executable targetFromGlob
-[100%] Built target targetFromGlob
-```
-As a general rule, you don't usually want to have to force CMake to run when it's something you build system (`make`/`ninja`) really *ought* to be able to do
