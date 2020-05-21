@@ -43,7 +43,7 @@ Running the previous `CMakeLists.txt`:
 
 Only the **cache** variable is stored in `CMakeCache.txt`:
 ```shell
-$ grep -IrE "Variable" -C1
+$ grep -IrE "Variable" -C1 CMakeCache.txt
 CMakeCache.txt-//Some description
 CMakeCache.txt:CacheVariable:STRING=A cache variable
 CMakeCache.txt-
